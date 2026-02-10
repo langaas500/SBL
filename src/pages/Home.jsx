@@ -329,7 +329,7 @@ export default function SolutionsByLangaasV2() {
           <Link to="/tjenester" className="nav-link">Tjenester</Link>
           <Link to="/prosjekter" className="nav-link">Prosjekter</Link>
           <Link to="/priser" className="nav-link">Priser</Link>
-          <button className="cta-btn" style={{ padding: "8px 20px", fontSize: "0.75rem" }}>Kontakt meg</button>
+          <Link to="/kontakt" className="cta-btn" style={{ padding: "8px 20px", fontSize: "0.75rem", textDecoration: "none" }}>Kontakt meg</Link>
         </div>
       </nav>
 
@@ -639,7 +639,7 @@ export default function SolutionsByLangaasV2() {
               </div>
             ))}
             <div style={{ flex: 1 }} />
-            <button className="cta-outline" style={{ width: "100%", marginTop: "28px", borderColor: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)" }}>Kontakt meg</button>
+            <Link to="/kontakt" className="cta-outline" style={{ width: "100%", marginTop: "28px", borderColor: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)", textDecoration: "none", textAlign: "center" }}>Kontakt meg</Link>
           </div>
         </div>
       </section>
