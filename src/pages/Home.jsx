@@ -1,85 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-
-// ─── AI CHAT ─────────────────────────────────────────────────
-const AIChat = ({ isOpen, onClose }) => {
-  const [messages, setMessages] = useState([
-    { role: "assistant", text: "Hei! 👋 Spør meg om nettsider, priser eller hva jeg kan gjøre for din bedrift!" }
-  ]);
-  const [input, setInput] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
-  const messagesEnd = useRef(null);
-
-  useEffect(() => { messagesEnd.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
-
-  const sendMessage = () => {
-    if (!input.trim()) return;
-    const userMsg = input.trim();
-    setInput("");
-    setMessages(prev => [...prev, { role: "user", text: userMsg }]);
-    setIsTyping(true);
-    setTimeout(() => {
-      const lowerMsg = userMsg.toLowerCase();
-      let reply = "Takk for meldingen! AI-chatten er i demo-modus. Ta kontakt på hei@solutionsbylangaas.no 😊";
-      if (lowerMsg.includes("pris") || lowerMsg.includes("kost")) reply = "Profesjonelle nettsider fra kun 2.999 kr! Kontakt meg for et skreddersydd tilbud.";
-      if (lowerMsg.includes("nettside") || lowerMsg.includes("web")) reply = "Jeg bygger moderne, raske nettsider for alle enheter. Alt fra én-sides til avanserte løsninger.";
-      setMessages(prev => [...prev, { role: "assistant", text: reply }]);
-      setIsTyping(false);
-    }, 1200);
-  };
-
-  if (!isOpen) return null;
-  return (
-    <div style={{
-      position: "fixed", bottom: "90px", right: "20px", width: "370px", maxWidth: "calc(100vw - 40px)",
-      height: "480px", maxHeight: "calc(100vh - 120px)", borderRadius: "18px",
-      background: "rgba(20,18,19,0.97)", border: "1px solid rgba(232,121,249,0.15)",
-      boxShadow: "0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(232,121,249,0.08)",
-      display: "flex", flexDirection: "column", overflow: "hidden", zIndex: 1000,
-      animation: "chatSlideUp 0.3s ease", backdropFilter: "blur(20px)",
-    }}>
-      <div style={{
-        padding: "14px 18px", borderBottom: "1px solid rgba(255,255,255,0.06)",
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#E879F9", boxShadow: "0 0 8px #E879F9", animation: "pulse 2s infinite" }} />
-          <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 600, color: "#fff", fontSize: "0.85rem" }}>AI Assistent</span>
-        </div>
-        <button onClick={onClose} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.4)", cursor: "pointer", fontSize: "1.3rem" }}>×</button>
-      </div>
-      <div style={{ flex: 1, overflowY: "auto", padding: "14px", display: "flex", flexDirection: "column", gap: "10px" }}>
-        {messages.map((msg, i) => (
-          <div key={i} style={{
-            alignSelf: msg.role === "user" ? "flex-end" : "flex-start", maxWidth: "82%",
-            padding: "9px 13px", borderRadius: msg.role === "user" ? "14px 14px 4px 14px" : "14px 14px 14px 4px",
-            background: msg.role === "user" ? "linear-gradient(135deg, #E879F9, #A855F7)" : "rgba(255,255,255,0.06)",
-            color: msg.role === "user" ? "#fff" : "rgba(255,255,255,0.85)", fontSize: "0.8rem",
-            fontFamily: "'Outfit', sans-serif", lineHeight: 1.5,
-          }}>{msg.text}</div>
-        ))}
-        {isTyping && (
-          <div style={{ alignSelf: "flex-start", padding: "9px 16px", borderRadius: "14px 14px 14px 4px", background: "rgba(255,255,255,0.06)", display: "flex", gap: "4px" }}>
-            {[0,1,2].map(i => <div key={i} style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#E879F9", animation: `typingDot 1.4s ease infinite ${i*0.2}s` }} />)}
-          </div>
-        )}
-        <div ref={messagesEnd} />
-      </div>
-      <div style={{ padding: "10px 14px", borderTop: "1px solid rgba(255,255,255,0.06)", display: "flex", gap: "8px" }}>
-        <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && sendMessage()}
-          placeholder="Skriv en melding..." style={{
-            flex: 1, padding: "9px 12px", borderRadius: "10px", border: "1px solid rgba(255,255,255,0.08)",
-            background: "rgba(255,255,255,0.04)", color: "#fff", fontSize: "0.8rem", fontFamily: "'Outfit', sans-serif", outline: "none",
-          }}
-        />
-        <button onClick={sendMessage} style={{
-          padding: "9px 14px", borderRadius: "10px", border: "none", background: "linear-gradient(135deg, #E879F9, #A855F7)",
-          color: "#fff", fontWeight: 600, cursor: "pointer", fontSize: "0.8rem",
-        }}>→</button>
-      </div>
-    </div>
-  );
-};
+import AIChatWidget from "../components/AIChatWidget";
 
 // ─── TECH CYCLER ────────────────────────────────────────────
 const TechCycler = () => {
@@ -254,7 +175,6 @@ const PortfolioCard = ({ title, category, gradient, icon, delay, href }) => {
 
 // ─── MAIN ────────────────────────────────────────────────────
 export default function SolutionsByLangaasV2() {
-  const [chatOpen, setChatOpen] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
 
@@ -653,8 +573,8 @@ export default function SolutionsByLangaasV2() {
           Book en gratis 15-minutters konsultasjon. Jeg finner ut hva som passer best for din bedrift.
         </p>
         <div style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap" }}>
-          <button className="cta-btn" style={{ fontSize: "0.9rem", padding: "14px 36px" }}>Start prosjektet ditt →</button>
-          <button className="cta-outline" onClick={() => setChatOpen(true)} style={{ fontSize: "0.9rem", padding: "14px 36px" }}>💬 Snakk med AI</button>
+          <Link to="/kontakt" className="cta-btn" style={{ fontSize: "0.9rem", padding: "14px 36px", textDecoration: "none" }}>Start prosjektet ditt →</Link>
+          <Link to="/kontakt" className="cta-outline" style={{ fontSize: "0.9rem", padding: "14px 36px", textDecoration: "none" }}>💬 Ta kontakt</Link>
         </div>
       </section>
 
@@ -693,16 +613,7 @@ export default function SolutionsByLangaasV2() {
       </div>
 
       {/* ── AI CHAT ── */}
-      <AIChat isOpen={chatOpen} onClose={() => setChatOpen(false)} />
-      <button onClick={() => setChatOpen(!chatOpen)} style={{
-        position: "fixed", bottom: "20px", right: "20px", width: "52px", height: "52px", borderRadius: "50%",
-        border: "none", background: "linear-gradient(135deg, #E879F9, #A855F7)", color: "#fff",
-        fontSize: "1.3rem", cursor: "pointer", boxShadow: "0 4px 18px rgba(232,121,249,0.3)",
-        zIndex: 999, transition: "all 0.3s ease", display: "flex", alignItems: "center", justifyContent: "center",
-      }}
-      onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.08)"; e.currentTarget.style.boxShadow = "0 8px 28px rgba(232,121,249,0.45)"; }}
-      onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "0 4px 18px rgba(232,121,249,0.3)"; }}
-      >{chatOpen ? "×" : "💬"}</button>
+      <AIChatWidget />
     </div>
   );
 }
