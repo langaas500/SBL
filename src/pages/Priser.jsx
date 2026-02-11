@@ -14,31 +14,40 @@ export default function Priser() {
         .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,121,249,0.3); }
         .cta-outline { padding: 12px 28px; border-radius: 50px; border: 1px solid rgba(232,121,249,0.25); background: transparent; color: #E879F9; font-weight: 500; font-size: 0.82rem; font-family: 'Outfit', sans-serif; cursor: pointer; transition: all 0.3s ease; }
         .cta-outline:hover { background: rgba(232,121,249,0.06); border-color: #E879F9; }
+        @media (max-width: 768px) {
+          .sub-nav { padding: 12px 20px !important; }
+          .sub-nav-links { display: none !important; }
+          .sub-nav-right { gap: 0 !important; }
+          .sub-hero { padding: 100px 20px 60px !important; }
+          .sub-content { padding: 0 20px 80px !important; }
+          .sub-grid-3 { grid-template-columns: 1fr !important; }
+          .sub-footer { padding: 24px 20px !important; }
+        }
       `}</style>
 
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "14px 36px", display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(20,18,19,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+      <nav className="sub-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "14px 36px", display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(20,18,19,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
         <Link to="/" style={{ textDecoration: "none" }}>
           <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "1.5rem", letterSpacing: "0.08em" }}>
             <span className="gradient-text">SBL</span>
           </div>
         </Link>
-        <div style={{ display: "flex", alignItems: "center", gap: "36px" }}>
-          <Link to="/tjenester" className="nav-link">Tjenester</Link>
-          <Link to="/prosjekter" className="nav-link">Prosjekter</Link>
-          <Link to="/priser" className="nav-link" style={{ color: "#E879F9" }}>Priser</Link>
+        <div className="sub-nav-right" style={{ display: "flex", alignItems: "center", gap: "36px" }}>
+          <Link to="/tjenester" className="nav-link sub-nav-links">Tjenester</Link>
+          <Link to="/prosjekter" className="nav-link sub-nav-links">Prosjekter</Link>
+          <Link to="/priser" className="nav-link sub-nav-links" style={{ color: "#E879F9" }}>Priser</Link>
           <Link to="/kontakt" className="cta-btn" style={{ padding: "8px 20px", fontSize: "0.75rem", textDecoration: "none" }}>Kontakt meg</Link>
         </div>
       </nav>
 
-      <section style={{ padding: "140px 48px 80px", maxWidth: "1200px", margin: "0 auto", textAlign: "center" }}>
+      <section className="sub-hero" style={{ padding: "140px 48px 80px", maxWidth: "1200px", margin: "0 auto", textAlign: "center" }}>
         <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#34D399", letterSpacing: "0.2em", textTransform: "uppercase" }}>PRISER</span>
         <h1 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 4.5vw, 3.5rem)", marginTop: "10px" }}>
           Enkelt og transparent<span style={{ color: "#34D399" }}>.</span>
         </h1>
       </section>
 
-      <section style={{ padding: "0 48px 120px", maxWidth: "1200px", margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "14px", alignItems: "stretch" }}>
+      <section className="sub-content" style={{ padding: "0 48px 120px", maxWidth: "1200px", margin: "0 auto" }}>
+        <div className="sub-grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "14px", alignItems: "stretch" }}>
           {/* Starter */}
           <div style={{ borderRadius: "16px", border: "1px solid rgba(255,255,255,0.06)", padding: "36px 28px", display: "flex", flexDirection: "column" }}>
             <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "14px" }}>STARTER</div>
@@ -94,7 +103,7 @@ export default function Priser() {
         </div>
       </section>
 
-      <footer style={{ borderTop: "1px solid rgba(255,255,255,0.04)", padding: "36px 48px", maxWidth: "1200px", margin: "0 auto", textAlign: "center" }}>
+      <footer className="sub-footer" style={{ borderTop: "1px solid rgba(255,255,255,0.04)", padding: "36px 48px", maxWidth: "1200px", margin: "0 auto", textAlign: "center" }}>
         <p style={{ fontSize: "0.65rem", color: "rgba(255,255,255,0.15)", fontFamily: "'JetBrains Mono', monospace" }}>
           © 2026 Solutions by Langaas. Org nr 936 977 774.
         </p>

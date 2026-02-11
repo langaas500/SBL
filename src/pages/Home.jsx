@@ -228,13 +228,45 @@ export default function SolutionsByLangaasV2() {
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(232,121,249,0.2); border-radius: 3px; }
+
+        @media (max-width: 768px) {
+          .cursor-glow { display: none !important; }
+          .main-nav { padding: 12px 20px !important; }
+          .nav-links-desktop { display: none !important; }
+          .nav-right { gap: 0 !important; }
+          .hero-section { padding: 100px 20px 60px !important; min-height: auto !important; }
+          .hero-flex { flex-direction: column !important; gap: 40px !important; }
+          .hero-left { flex: 1 1 100% !important; }
+          .hero-right { flex: 1 1 100% !important; }
+          .hero-title { font-size: clamp(1.8rem, 8vw, 2.8rem) !important; }
+          .hero-badge-bottom { display: none !important; }
+          .scroll-indicator { display: none !important; }
+          .marquee-section { padding: 12px 0 !important; }
+          .stats-grid { grid-template-columns: repeat(2, 1fr) !important; padding: 40px 20px !important; }
+          .services-section { padding: 60px 20px !important; }
+          .services-header { flex-direction: column !important; gap: 24px !important; align-items: flex-start !important; }
+          .services-header h2 { font-size: clamp(1.5rem, 6vw, 2.2rem) !important; }
+          .services-grid { grid-template-columns: 1fr !important; }
+          .trust-section { padding: 0 20px 20px !important; }
+          .trust-image-wrap { height: 200px !important; }
+          .portfolio-section { padding: 60px 20px 80px !important; }
+          .portfolio-grid { grid-template-columns: 1fr !important; }
+          .pricing-section { padding: 60px 20px !important; }
+          .pricing-grid { grid-template-columns: 1fr !important; }
+          .cta-section { padding: 60px 20px !important; }
+          .cta-section h2 { font-size: clamp(1.5rem, 6vw, 2.2rem) !important; }
+          .main-footer { padding: 40px 20px 24px !important; flex-direction: column !important; align-items: center !important; text-align: center !important; }
+          .footer-logo { font-size: 2.4rem !important; }
+          .footer-links { flex-direction: column !important; gap: 24px !important; align-items: center !important; }
+          .footer-bottom { padding: 16px 20px 24px !important; }
+        }
       `}</style>
 
       {/* Cursor glow */}
-      <div style={{ position: "fixed", width: "350px", height: "350px", borderRadius: "50%", background: "radial-gradient(circle, rgba(232,121,249,0.04) 0%, transparent 70%)", left: mousePos.x - 175, top: mousePos.y - 175, pointerEvents: "none", zIndex: 0, transition: "left 0.4s ease, top 0.4s ease" }} />
+      <div className="cursor-glow" style={{ position: "fixed", width: "350px", height: "350px", borderRadius: "50%", background: "radial-gradient(circle, rgba(232,121,249,0.04) 0%, transparent 70%)", left: mousePos.x - 175, top: mousePos.y - 175, pointerEvents: "none", zIndex: 0, transition: "left 0.4s ease, top 0.4s ease" }} />
 
       {/* ── NAV ── */}
-      <nav style={{
+      <nav className="main-nav" style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "14px 36px",
         display: "flex", alignItems: "center", justifyContent: "space-between",
         background: scrollY > 50 ? "rgba(20,18,19,0.92)" : "transparent",
@@ -245,21 +277,21 @@ export default function SolutionsByLangaasV2() {
         <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "1.5rem", letterSpacing: "0.08em" }}>
           <span className="gradient-text">SBL</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "36px" }}>
-          <Link to="/tjenester" className="nav-link">Tjenester</Link>
-          <Link to="/prosjekter" className="nav-link">Prosjekter</Link>
-          <Link to="/priser" className="nav-link">Priser</Link>
+        <div className="nav-right" style={{ display: "flex", alignItems: "center", gap: "36px" }}>
+          <Link to="/tjenester" className="nav-link nav-links-desktop">Tjenester</Link>
+          <Link to="/prosjekter" className="nav-link nav-links-desktop">Prosjekter</Link>
+          <Link to="/priser" className="nav-link nav-links-desktop">Priser</Link>
           <Link to="/kontakt" className="cta-btn" style={{ padding: "8px 20px", fontSize: "0.75rem", textDecoration: "none" }}>Kontakt meg</Link>
         </div>
       </nav>
 
       {/* ── HERO ── */}
-      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "140px 48px 100px", maxWidth: "1200px", margin: "0 auto", position: "relative" }}>
+      <section className="hero-section" style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "140px 48px 100px", maxWidth: "1200px", margin: "0 auto", position: "relative" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, backgroundImage: "linear-gradient(rgba(232,121,249,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(232,121,249,0.02) 1px, transparent 1px)", backgroundSize: "70px 70px", pointerEvents: "none" }} />
 
-        <div style={{ display: "flex", alignItems: "center", gap: "80px", width: "100%", position: "relative", zIndex: 1 }}>
+        <div className="hero-flex" style={{ display: "flex", alignItems: "center", gap: "80px", width: "100%", position: "relative", zIndex: 1 }}>
           {/* Left */}
-          <div style={{ flex: "1 1 50%" }}>
+          <div className="hero-left" style={{ flex: "1 1 50%" }}>
             <div style={{
               display: "inline-flex", alignItems: "center", gap: "8px", padding: "7px 16px",
               borderRadius: "50px", border: "1px solid rgba(232,121,249,0.15)", background: "rgba(232,121,249,0.04)",
@@ -292,7 +324,7 @@ export default function SolutionsByLangaasV2() {
           </div>
 
           {/* Right: hero mockup image */}
-          <div style={{
+          <div className="hero-right" style={{
             flex: "1 1 45%",
             animation: "fadeInUp 0.8s ease 0.5s both",
             position: "relative",
@@ -320,7 +352,7 @@ export default function SolutionsByLangaasV2() {
               }}
             />
             {/* Small floating badge on image */}
-            <div style={{
+            <div className="hero-badge-bottom" style={{
               position: "absolute",
               bottom: "-14px",
               left: "50%",
@@ -347,14 +379,14 @@ export default function SolutionsByLangaasV2() {
           </div>
         </div>
 
-        <div style={{ position: "absolute", bottom: "44px", left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", animation: "fadeInUp 1s ease 1s both" }}>
+        <div className="scroll-indicator" style={{ position: "absolute", bottom: "44px", left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", animation: "fadeInUp 1s ease 1s both" }}>
           <span style={{ fontSize: "0.6rem", color: "rgba(255,255,255,0.2)", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em" }}>SCROLL</span>
           <div style={{ width: "1px", height: "36px", background: "linear-gradient(180deg, rgba(232,121,249,0.4), transparent)", animation: "pulse 2s infinite" }} />
         </div>
       </section>
 
       {/* ── MARQUEE ── */}
-      <div style={{ overflow: "hidden", borderTop: "1px solid rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.04)", padding: "16px 0" }}>
+      <div className="marquee-section" style={{ overflow: "hidden", borderTop: "1px solid rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.04)", padding: "16px 0" }}>
         <div style={{ display: "flex", gap: "60px", animation: "marquee 22s linear infinite", whiteSpace: "nowrap", width: "fit-content" }}>
           {[...Array(2)].map((_, rep) =>
             ["WEBDESIGN", "UTVIKLING", "SEO", "AI-CHAT", "RESPONSIVT", "RASK LEVERING", "HOSTING", "VEDLIKEHOLD"].map((text, i) => (
@@ -371,7 +403,7 @@ export default function SolutionsByLangaasV2() {
       </div>
 
       {/* ── STATS ── */}
-      <section style={{ padding: "90px 48px", maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1px", background: "rgba(255,255,255,0.04)", borderRadius: "16px", overflow: "hidden" }}>
+      <section className="stats-grid" style={{ padding: "90px 48px", maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1px", background: "rgba(255,255,255,0.04)", borderRadius: "16px", overflow: "hidden" }}>
         {[
           { tech: true, label: "Teknologier", color: "#E879F9" },
           { num: 7, suffix: " dager", label: "Snitt levering", color: "#38BDF8" },
@@ -388,8 +420,8 @@ export default function SolutionsByLangaasV2() {
       </section>
 
       {/* ── SERVICES ── */}
-      <section style={{ padding: "120px 48px", maxWidth: "1200px", margin: "0 auto" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "48px", marginBottom: "56px" }}>
+      <section className="services-section" style={{ padding: "120px 48px", maxWidth: "1200px", margin: "0 auto" }}>
+        <div className="services-header" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "48px", marginBottom: "56px" }}>
           <div>
             <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#E879F9", letterSpacing: "0.2em", textTransform: "uppercase" }}>TJENESTER</span>
             <h2 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "clamp(2.4rem, 5vw, 4rem)", marginTop: "10px", lineHeight: 1.05 }}>
@@ -401,7 +433,7 @@ export default function SolutionsByLangaasV2() {
             <AnimatedKeyboard />
           </div>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "14px" }}>
+        <div className="services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "14px" }}>
           {[
             { icon: "🍽️", title: "Restaurant-sider", desc: "Interaktive menyer, booking og atmosfærisk design som får gjester i døren.", accent: "#E879F9", href: "https://showcase-hub-black.vercel.app/restauranter" },
             { icon: "🔨", title: "Håndverker-sider", desc: "Profesjonelle sider som viser frem arbeidet ditt og genererer leads.", accent: "#38BDF8" },
@@ -428,8 +460,8 @@ export default function SolutionsByLangaasV2() {
       </section>
 
       {/* ── TRUST IMAGE ── */}
-      <section style={{ padding: "0 48px 20px", maxWidth: "1200px", margin: "0 auto" }}>
-        <div style={{
+      <section className="trust-section" style={{ padding: "0 48px 20px", maxWidth: "1200px", margin: "0 auto" }}>
+        <div className="trust-image-wrap" style={{
           position: "relative",
           borderRadius: "20px",
           overflow: "hidden",
@@ -481,7 +513,7 @@ export default function SolutionsByLangaasV2() {
       </section>
 
       {/* ── PORTFOLIO ── */}
-      <section style={{ padding: "80px 48px 120px", maxWidth: "1200px", margin: "0 auto" }}>
+      <section className="portfolio-section" style={{ padding: "80px 48px 120px", maxWidth: "1200px", margin: "0 auto" }}>
         <div style={{ marginBottom: "40px" }}>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#38BDF8", letterSpacing: "0.2em", textTransform: "uppercase" }}>PROSJEKTER</span>
           <h2 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "clamp(1.7rem, 3.5vw, 2.8rem)", marginTop: "10px", lineHeight: 1.1 }}>
@@ -493,7 +525,7 @@ export default function SolutionsByLangaasV2() {
         </div>
 
         {/* Bottom: cards side by side */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "14px" }}>
+        <div className="portfolio-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "14px" }}>
           <PortfolioCard icon="🍔" category="Restaurant" title="Diner 22 — Interaktiv neon-meny" gradient="linear-gradient(135deg, #E879F9, #F59E0B)" delay={0.1} href="https://diner22-dlof.vercel.app/meny" />
           <PortfolioCard icon="🔧" category="Håndverker" title="Snekker Nord — Portefølje & kontakt" gradient="linear-gradient(135deg, #38BDF8, #34D399)" delay={0.2} />
           <PortfolioCard icon="⚖️" category="AI-plattform" title="harjegkravpå.no — Juridisk AI" gradient="linear-gradient(135deg, #A855F7, #E879F9)" delay={0.3} />
@@ -501,14 +533,14 @@ export default function SolutionsByLangaasV2() {
       </section>
 
       {/* ── PRICING ── */}
-      <section style={{ padding: "120px 48px", maxWidth: "1200px", margin: "0 auto" }}>
+      <section className="pricing-section" style={{ padding: "120px 48px", maxWidth: "1200px", margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "56px" }}>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#34D399", letterSpacing: "0.2em", textTransform: "uppercase" }}>PRISER</span>
           <h2 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "clamp(1.7rem, 3.5vw, 2.8rem)", marginTop: "10px" }}>
             Enkelt og transparent<span style={{ color: "#34D399" }}>.</span>
           </h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "14px", alignItems: "stretch" }}>
+        <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "14px", alignItems: "stretch" }}>
           {/* Starter */}
           <div style={{ borderRadius: "16px", border: "1px solid rgba(255,255,255,0.06)", padding: "36px 28px", display: "flex", flexDirection: "column" }}>
             <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "14px" }}>STARTER</div>
@@ -565,7 +597,7 @@ export default function SolutionsByLangaasV2() {
       </section>
 
       {/* ── CTA ── */}
-      <section style={{ padding: "120px 48px", maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
+      <section className="cta-section" style={{ padding: "120px 48px", maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
         <h2 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 4.5vw, 3.2rem)", lineHeight: 1.1, marginBottom: "20px" }}>
           Klar for å ta bedriften<br />din <span className="gradient-text">på nett</span>?
         </h2>
@@ -579,9 +611,9 @@ export default function SolutionsByLangaasV2() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer style={{ borderTop: "1px solid rgba(255,255,255,0.04)", padding: "56px 48px 36px", maxWidth: "1200px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "40px" }}>
+      <footer className="main-footer" style={{ borderTop: "1px solid rgba(255,255,255,0.04)", padding: "56px 48px 36px", maxWidth: "1200px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "40px" }}>
         <div>
-          <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "3.9rem", marginBottom: "12px", letterSpacing: "0.08em" }}>
+          <div className="footer-logo" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "3.9rem", marginBottom: "12px", letterSpacing: "0.08em" }}>
             <span className="gradient-text">SBL</span>
           </div>
           <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "0.78rem", maxWidth: "260px", lineHeight: 1.6 }}>
@@ -591,7 +623,7 @@ export default function SolutionsByLangaasV2() {
             Org nr 936 977 774
           </p>
         </div>
-        <div style={{ display: "flex", gap: "56px" }}>
+        <div className="footer-links" style={{ display: "flex", gap: "56px" }}>
           <div>
             <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.58rem", color: "rgba(255,255,255,0.25)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "14px" }}>Kontakt</div>
             <div style={{ display: "flex", flexDirection: "column", gap: "6px", fontSize: "0.78rem", color: "rgba(255,255,255,0.4)" }}>
@@ -608,7 +640,7 @@ export default function SolutionsByLangaasV2() {
           </div>
         </div>
       </footer>
-      <div style={{ textAlign: "center", padding: "20px 48px 36px", fontSize: "0.65rem", color: "rgba(255,255,255,0.15)", fontFamily: "'JetBrains Mono', monospace" }}>
+      <div className="footer-bottom" style={{ textAlign: "center", padding: "20px 48px 36px", fontSize: "0.65rem", color: "rgba(255,255,255,0.15)", fontFamily: "'JetBrains Mono', monospace" }}>
         © 2026 Solutions by Langaas. Laget med ❤️ i Mysen.
       </div>
 

@@ -24,23 +24,32 @@ export default function Kontakt() {
         .nav-link:hover { color: #E879F9; }
         .cta-btn { padding: 12px 28px; border-radius: 50px; border: none; background: linear-gradient(135deg, #E879F9, #A855F7); color: #fff; font-weight: 600; font-size: 0.82rem; font-family: 'Outfit', sans-serif; cursor: pointer; transition: all 0.3s ease; }
         .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,121,249,0.3); }
+        @media (max-width: 768px) {
+          .sub-nav { padding: 12px 20px !important; }
+          .sub-nav-links { display: none !important; }
+          .sub-nav-right { gap: 0 !important; }
+          .sub-hero { padding: 100px 20px 60px !important; }
+          .sub-content { padding: 0 20px 80px !important; }
+          .kontakt-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .sub-footer { padding: 24px 20px !important; }
+        }
       `}</style>
 
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "14px 36px", display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(20,18,19,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+      <nav className="sub-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "14px 36px", display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(20,18,19,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
         <Link to="/" style={{ textDecoration: "none" }}>
           <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "1.5rem", letterSpacing: "0.08em" }}>
             <span className="gradient-text">SBL</span>
           </div>
         </Link>
-        <div style={{ display: "flex", alignItems: "center", gap: "36px" }}>
-          <Link to="/tjenester" className="nav-link">Tjenester</Link>
-          <Link to="/prosjekter" className="nav-link">Prosjekter</Link>
-          <Link to="/priser" className="nav-link">Priser</Link>
+        <div className="sub-nav-right" style={{ display: "flex", alignItems: "center", gap: "36px" }}>
+          <Link to="/tjenester" className="nav-link sub-nav-links">Tjenester</Link>
+          <Link to="/prosjekter" className="nav-link sub-nav-links">Prosjekter</Link>
+          <Link to="/priser" className="nav-link sub-nav-links">Priser</Link>
           <Link to="/kontakt" className="cta-btn" style={{ padding: "8px 20px", fontSize: "0.75rem", textDecoration: "none" }}>Kontakt meg</Link>
         </div>
       </nav>
 
-      <section style={{ padding: "140px 48px 80px", maxWidth: "1200px", margin: "0 auto" }}>
+      <section className="sub-hero" style={{ padding: "140px 48px 80px", maxWidth: "1200px", margin: "0 auto" }}>
         <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#E879F9", letterSpacing: "0.2em", textTransform: "uppercase" }}>KONTAKT</span>
         <h1 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 4.5vw, 3.5rem)", marginTop: "10px", lineHeight: 1.05 }}>
           La oss snakke<span style={{ color: "#E879F9" }}>.</span>
@@ -50,8 +59,8 @@ export default function Kontakt() {
         </p>
       </section>
 
-      <section style={{ padding: "0 48px 120px", maxWidth: "1200px", margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px" }}>
+      <section className="sub-content" style={{ padding: "0 48px 120px", maxWidth: "1200px", margin: "0 auto" }}>
+        <div className="kontakt-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px" }}>
           {/* Skjema */}
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
             <div>
@@ -137,7 +146,7 @@ export default function Kontakt() {
         </div>
       </section>
 
-      <footer style={{ borderTop: "1px solid rgba(255,255,255,0.04)", padding: "36px 48px", maxWidth: "1200px", margin: "0 auto", textAlign: "center" }}>
+      <footer className="sub-footer" style={{ borderTop: "1px solid rgba(255,255,255,0.04)", padding: "36px 48px", maxWidth: "1200px", margin: "0 auto", textAlign: "center" }}>
         <p style={{ fontSize: "0.65rem", color: "rgba(255,255,255,0.15)", fontFamily: "'JetBrains Mono', monospace" }}>
           © 2026 Solutions by Langaas. Org nr 936 977 774.
         </p>
