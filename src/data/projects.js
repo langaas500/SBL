@@ -18,8 +18,8 @@ export const projects = [
     tags: ["Mobilapp (PWA)", "PDF og Excel", "Admin", "Norsk og polsk", "Offline"],
     images: [
       { src: "/projects/servicerapport.webp", alt: "Innloggingen i Servicerapport-appen med valg mellom norsk og polsk" },
-      { src: "/projects/servicerapport-2-pdf-side1.webp", alt: "Side 1 av en ferdig PDF-rapport med kundeinfo, oppsummering og avviksliste (eksempeldata)" },
-      { src: "/projects/servicerapport-3-pdf-side2.webp", alt: "Side 2 av PDF-rapporten med bilder per avvik og tilstandsvurdering (eksempeldata)" },
+      { src: "/projects/servicerapport-2-pdf-side1.webp", alt: "Side 1 av en ferdig PDF-rapport med kundeinfo, oppsummering og avviksliste (fiktive eksempeldata)" },
+      { src: "/projects/servicerapport-3-pdf-side2.webp", alt: "Side 2 av PDF-rapporten med bilder per avvik og tilstandsvurdering (fiktive eksempeldata)" },
     ],
   },
   {
