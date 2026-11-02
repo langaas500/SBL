@@ -97,11 +97,12 @@ function ProjectCard({ p }) {
         <div className="proj-cat">{p.category}</div>
         <h3>{p.title}</h3>
         <p>{p.description}</p>
+        {p.note && <p className="proj-note">{p.note}</p>}
         {p.tags?.length > 0 && (
           <div className="proj-tags">{p.tags.map((t) => <span key={t}>{t}</span>)}</div>
         )}
         {p.url && (
-          <a className="proj-link" href={p.url} target="_blank" rel="noopener noreferrer">Se løsningen →</a>
+          <a className="proj-link" href={p.url} target="_blank" rel="noopener noreferrer">{p.urlLabel || 'Se løsningen →'}</a>
         )}
       </div>
     </article>

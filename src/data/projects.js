@@ -7,7 +7,9 @@
 //   tags        – korte stikkord (valgfritt)
 //   image       – ett bilde i public/projects/, f.eks. "/projects/navn.webp" (valgfritt)
 //   images      – flere bilder du kan sveipe mellom: [{ src, alt }, …] (valgfritt, 1200×1200 passer best)
-//   url         – lenke til live-løsning (valgfritt)
+//   url         – lenke til live-løsning eller demo (valgfritt)
+//   urlLabel    – tekst på lenken, standard «Se løsningen →» (valgfritt)
+//   note        – kort merknad under beskrivelsen, f.eks. hvorfor noe ikke vises live (valgfritt)
 //   visual      – "reports" bruker innebygd illustrasjon når du ikke har bilde (valgfritt)
 export const projects = [
   {
@@ -15,12 +17,15 @@ export const projects = [
     category: "Digitalt system",
     description:
       "Jeg ble lei av tungvinte Excel-skjemaer og bygde en app teknikerne fyller ut på mobilen, rett ute hos kunden. De registrerer avvik med bilder, og appen lager en ferdig PDF-rapport og en utfylt Excel-fil som sendes til kontoret. Admin går gjennom, justerer og behandler rapportene. Appen virker uten nett og finnes på norsk og polsk.",
+    note: "Den ferdige appen for kunden vises ikke live på grunn av sensitiv informasjon. Demoen bruker fiktive data.",
     tags: ["Mobilapp (PWA)", "PDF og Excel", "Admin", "Norsk og polsk", "Offline"],
     images: [
       { src: "/projects/servicerapport.webp", alt: "Innloggingen i Servicerapport-appen med valg mellom norsk og polsk" },
       { src: "/projects/servicerapport-2-pdf-side1.webp", alt: "Side 1 av en ferdig PDF-rapport med kundeinfo, oppsummering og avviksliste (fiktive eksempeldata)" },
       { src: "/projects/servicerapport-3-pdf-side2.webp", alt: "Side 2 av PDF-rapporten med bilder per avvik og tilstandsvurdering (fiktive eksempeldata)" },
     ],
+    url: "https://serviceappen-demo.vercel.app",
+    urlLabel: "Prøv demoen →",
   },
   {
     title: "Pelican Beach Roleplay",
