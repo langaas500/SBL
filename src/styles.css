@@ -129,3 +129,28 @@ a { color: inherit; }
 .btn.primary:hover { box-shadow: 0 8px 28px rgba(232,121,249,.3); }
 .site-foot { border-top: 1px solid var(--line); padding: 28px clamp(20px, 4vw, 48px); text-align: center; font-family: var(--mono); font-size: .66rem; color: rgba(255,255,255,.3); }
 @media (max-width: 700px) { .page-main { padding-top: 100px; } .section-label { margin-top: 48px; } }
+
+/* ── Prosjekter ── */
+.proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-top: 44px; }
+.proj { display: flex; flex-direction: column; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: rgba(255,255,255,.035); backdrop-filter: blur(10px); text-decoration: none; color: inherit; transition: border-color .3s, transform .3s; }
+.proj:hover { border-color: rgba(232,121,249,.4); transform: translateY(-4px); }
+.proj-visual { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: radial-gradient(ellipse at 30% 20%, rgba(124,92,255,.35), rgba(20,16,36,.9) 70%); display: flex; align-items: center; justify-content: center; padding: 22px; }
+.proj-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.proj-body { padding: 22px 24px 26px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.proj-cat { font-family: var(--mono); font-size: .64rem; letter-spacing: .16em; text-transform: uppercase; color: #a89bff; }
+.proj h3 { font-size: 1.3rem; font-weight: 700; letter-spacing: -.015em; }
+.proj p { color: var(--muted); font-size: .92rem; line-height: 1.65; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
+.proj-tags span { font-family: var(--mono); font-size: .62rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: rgba(255,255,255,.6); }
+.proj-link { font-size: .85rem; font-weight: 600; color: var(--pink); }
+.proj-more { justify-content: center; align-items: flex-start; padding: 28px 26px; gap: 12px; border-style: dashed; background: rgba(124,92,255,.06); }
+.proj-more h3 { font-size: 1.25rem; }
+
+/* Illustrasjon: rapportliste */
+.mock-reports { width: 100%; max-width: 330px; padding: 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,.1); background: rgba(24,20,42,.9); box-shadow: 0 18px 44px rgba(0,0,0,.45); }
+.mock-reports b { display: block; font-size: .95rem; margin-bottom: 10px; }
+.mock-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; margin-bottom: 6px; border-radius: 9px; background: rgba(255,255,255,.05); font-size: .76rem; }
+.mock-row i { width: 7px; height: 7px; border-radius: 50%; background: #7c5cff; flex: none; }
+.mock-row span { flex: 1; }
+.mock-row em { font-style: normal; font-size: .6rem; padding: 3px 9px; border-radius: 999px; background: rgba(253,186,116,.16); color: #fdba74; }
+.mock-row em.ok { background: rgba(190,242,100,.15); color: #bef264; }
