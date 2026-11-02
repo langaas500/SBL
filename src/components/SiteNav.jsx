@@ -4,8 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 const LINKS = [
   { to: "/", label: "Hjem" },
   { to: "/tjenester", label: "Tjenester" },
-  { to: "/prosjekter", label: "Prosjekter" },
-  { to: "/priser", label: "Priser" },
+  { to: "/om", label: "Om Martin" },
   { to: "/kontakt", label: "Kontakt" },
 ];
 
@@ -82,7 +81,7 @@ export default function SiteNav() {
         </ul>
         <div className="sbl-menu-foot">
           <a href="mailto:hei@solutionsbylangaas.no" tabIndex={open ? 0 : -1}>hei@solutionsbylangaas.no</a>
-          <span>Mysen · Indre Østfold</span>
+          <span>Solutions by Langås</span>
         </div>
       </nav>
     </>

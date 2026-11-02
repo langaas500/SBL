@@ -30,6 +30,7 @@ export default async function handler(req, res) {
     const epost = str(body.epost, 150);
     const facebook = str(body.facebook, 200);
     const innvending = str(body.innvending, 300);
+    const behov = str(body.behov, 600);
     const melding = str(body.melding, 3000);
     const kilde = body.kilde === "kontaktskjema" ? "kontaktskjema" : "chat";
     const plattformer = Array.isArray(body.plattformer)
@@ -71,6 +72,7 @@ export default async function handler(req, res) {
             ${navn ? row("Navn", esc(navn), "100px") : ""}
             ${bedrift ? row("Bedrift", esc(bedrift)) : ""}
             ${bransje ? row("Bransje", esc(bransje)) : ""}
+            ${behov ? row("Behov", esc(behov)) : ""}
             ${telefon ? row("Telefon", `<a href="tel:${esc(telHref)}" style="color: #38BDF8; text-decoration: none;">${esc(telefon)}</a>`) : ""}
             ${epost ? row("E-post", `<a href="mailto:${esc(mailHref)}" style="color: #38BDF8; text-decoration: none;">${esc(epost)}</a>`) : ""}
             ${facebook ? row("Facebook", `<a href="${esc(fbHref)}" style="color: #38BDF8; text-decoration: none;">${esc(facebook)}</a>`) : ""}
@@ -98,7 +100,7 @@ export default async function handler(req, res) {
             ${samtale.map((msg) => `
               <div style="margin-bottom: 8px;">
                 <span style="font-size: 11px; color: ${msg.role === "user" ? "#38BDF8" : "#E879F9"}; text-transform: uppercase; letter-spacing: 0.5px;">
-                  ${msg.role === "user" ? "Besøkende" : "Langaas AI"}
+                  ${msg.role === "user" ? "Besøkende" : "Chat-assistent"}
                 </span>
                 <p style="margin: 2px 0 0; font-size: 13px; color: #D4CBC2; line-height: 1.5;">${esc(msg.text)}</p>
               </div>
@@ -108,7 +110,7 @@ export default async function handler(req, res) {
         ` : ""}
         <div style="padding: 20px 32px; background: rgba(255,255,255,0.03); text-align: center;">
           ${telHref ? `<a href="tel:${esc(telHref)}" style="display: inline-block; padding: 10px 24px; background: linear-gradient(135deg, #E879F9, #A855F7); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">Ring ${esc(navn || "kunden")} nå →</a>` : ""}
-          <p style="margin: 12px 0 0; font-size: 11px; color: #A39485;">Samlet inn via ${kilde === "kontaktskjema" ? "kontaktskjemaet" : "Langaas AI"} på solutionsbylangaas.no</p>
+          <p style="margin: 12px 0 0; font-size: 11px; color: #A39485;">Samlet inn via ${kilde === "kontaktskjema" ? "kontaktskjemaet" : "chat-assistenten"} på solutionsbylangaas.no</p>
         </div>
       </div>
     `;
@@ -118,7 +120,7 @@ export default async function handler(req, res) {
     const subjectCo = (bedrift || bransje || "Bedrift ikke oppgitt").replace(/[\r\n]+/g, " ");
 
     const { data, error } = await resend.emails.send({
-      from: "Langaas AI <ai@solutionsbylangaas.no>",
+      from: "Solutions by Langås <ai@solutionsbylangaas.no>",
       to: ["lead@solutionsbylangaas.com"],
       // Svar går rett til kunden når e-post er oppgitt og ser gyldig ut
       ...(/^[^\s@<>,;]+@[^\s@<>,;]+\.[^\s@<>,;]+$/.test(epost) ? { replyTo: epost } : {}),

@@ -50,10 +50,10 @@ export default function Kontakt() {
       <section className="sub-hero" style={{ padding: "140px 48px 80px", maxWidth: "1200px", margin: "0 auto" }}>
         <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#E879F9", letterSpacing: "0.2em", textTransform: "uppercase" }}>KONTAKT</span>
         <h1 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 4.5vw, 3.5rem)", marginTop: "10px", lineHeight: 1.05 }}>
-          La oss snakke<span style={{ color: "#E879F9" }}>.</span>
+          Fortell meg om ideen<span style={{ color: "#E879F9" }}>.</span>
         </h1>
         <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.95rem", maxWidth: "500px", lineHeight: 1.7, marginTop: "20px" }}>
-          Klar for en ny nettside? Send meg en melding, så tar jeg kontakt innen 24 timer.
+          Har du en idé eller et problem du ikke helt vet hvordan du skal løse digitalt? Det er helt greit. Send meg noen linjer, så tar jeg kontakt.
         </p>
       </section>
 
@@ -104,7 +104,7 @@ export default function Kontakt() {
               <label style={{ display: "block", fontSize: "0.7rem", color: "rgba(255,255,255,0.4)", fontFamily: "'JetBrains Mono', monospace", marginBottom: "6px", letterSpacing: "0.05em" }}>Melding</label>
               <textarea
                 required rows={5} value={form.melding} onChange={e => setForm({ ...form, melding: e.target.value })}
-                placeholder="Fortell meg litt om prosjektet ditt..."
+                placeholder="Hva er tungvint i dag, eller hva vil du ha til å fungere?"
                 style={{
                   width: "100%", padding: "12px 16px", borderRadius: "10px", border: "1px solid rgba(255,255,255,0.08)",
                   background: "rgba(255,255,255,0.04)", color: "#fff", fontSize: "0.85rem", fontFamily: "'Outfit', sans-serif", outline: "none",
@@ -118,7 +118,7 @@ export default function Kontakt() {
               {status === 'sending' ? 'Sender...' : status === 'sent' ? '✓ Sendt' : 'Send melding →'}
             </button>
             {status === 'sent' && (
-              <p role="status" style={{ fontSize: "0.8rem", color: "#34D399" }}>Takk! Jeg tar kontakt innen 24 timer.</p>
+              <p role="status" style={{ fontSize: "0.8rem", color: "#34D399" }}>Takk! Jeg tar kontakt.</p>
             )}
             {status === 'error' && (
               <p role="alert" style={{ fontSize: "0.8rem", color: "#F87171" }}>
@@ -138,15 +138,15 @@ export default function Kontakt() {
             </div>
 
             <div style={{ padding: "28px", borderRadius: "14px", border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.015)" }}>
-              <div style={{ fontSize: "1.5rem", marginBottom: "12px" }}>📍</div>
-              <div style={{ fontSize: "0.6rem", color: "#E879F9", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>Lokasjon</div>
-              <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem" }}>Mysen, Indre Østfold</span>
+              <div style={{ fontSize: "1.5rem", marginBottom: "12px" }}>💬</div>
+              <div style={{ fontSize: "0.6rem", color: "#E879F9", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>Direkte</div>
+              <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem" }}>Du snakker med personen som bygger løsningen</span>
             </div>
 
             <div style={{ padding: "28px", borderRadius: "14px", border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.015)" }}>
-              <div style={{ fontSize: "1.5rem", marginBottom: "12px" }}>⚡</div>
-              <div style={{ fontSize: "0.6rem", color: "#E879F9", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>Responstid</div>
-              <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem" }}>Svar innen 24 timer</span>
+              <div style={{ fontSize: "1.5rem", marginBottom: "12px" }}>👤</div>
+              <div style={{ fontSize: "0.6rem", color: "#E879F9", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>Hvem svarer</div>
+              <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem" }}>Martin Langås, Solutions by Langås</span>
             </div>
           </div>
         </div>
@@ -154,7 +154,7 @@ export default function Kontakt() {
 
       <footer className="sub-footer" style={{ borderTop: "1px solid rgba(255,255,255,0.04)", padding: "36px 48px", maxWidth: "1200px", margin: "0 auto", textAlign: "center" }}>
         <p style={{ fontSize: "0.65rem", color: "rgba(255,255,255,0.15)", fontFamily: "'JetBrains Mono', monospace" }}>
-          © 2026 Solutions by Langaas. Org nr 936 977 774.
+          © 2026 Solutions by Langås. Org nr 936 977 774.
         </p>
       </footer>
     </div>

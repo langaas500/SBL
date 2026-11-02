@@ -8,7 +8,7 @@ export default function AIChatWidget() {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      text: "Hei! 👋 Lurer du på nettside for bedriften din, eller bare ser deg rundt?",
+      text: "Hei! 👋 Har du en idé eller et problem du ikke helt vet hvordan du skal løse digitalt?",
     },
   ]);
   const [input, setInput] = useState("");
@@ -98,7 +98,7 @@ export default function AIChatWidget() {
         ...newMessages,
         {
           role: "assistant",
-          text: "Oops, noe gikk galt! Prøv igjen, eller ring Maxi direkte 😊",
+          text: "Oops, noe gikk galt! Prøv igjen, eller send en e-post til hei@solutionsbylangaas.no 😊",
         },
       ]);
     } finally {
@@ -143,7 +143,7 @@ export default function AIChatWidget() {
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#34D399", boxShadow: "0 0 8px rgba(52,211,153,0.4)", animation: "pulse 2s infinite" }} />
-            <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 600, color: "#F2ECE6", fontSize: "0.85rem" }}>Langaas AI</span>
+            <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 600, color: "#F2ECE6", fontSize: "0.85rem" }}>Assistent</span>
             <span style={{ fontSize: "0.6rem", color: "rgba(255,255,255,0.3)", fontFamily: "'JetBrains Mono', monospace" }}>online</span>
           </div>
           <button onClick={() => setIsOpen(false)} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.4)", cursor: "pointer", fontSize: "1.3rem", padding: "0 4px" }}>×</button>
