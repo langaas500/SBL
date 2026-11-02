@@ -1,650 +1,172 @@
-import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import SiteNav from "../components/SiteNav";
 import AIChatWidget from "../components/AIChatWidget";
 
-// ─── TECH CYCLER ────────────────────────────────────────────
-const TechCycler = () => {
-  const techs = [
-    { name: "Tailwind", color: "#38BDF8" },
-    { name: "CSS", color: "#264DE4" },
-    { name: "React", color: "#61DAFB" },
-    { name: "Vite", color: "#BD34FE" },
-    { name: "Framer", color: "#E879F9" },
-    { name: "JavaScript", color: "#F7DF1E" },
-    { name: "AI", color: "#34D399" },
-    { name: "Node.js", color: "#68A063" },
-    { name: "SEO", color: "#F59E0B" },
-    { name: "Figma", color: "#A259FF" },
-  ];
-  const [index, setIndex] = useState(0);
-  const [fade, setFade] = useState(true);
-  useEffect(() => {
-    const iv = setInterval(() => {
-      setFade(false);
-      setTimeout(() => {
-        setIndex(prev => (prev + 1) % techs.length);
-        setFade(true);
-      }, 300);
-    }, 2000);
-    return () => clearInterval(iv);
-  }, []);
-  return (
-    <span style={{ color: techs[index].color, transition: "opacity 0.3s ease, color 0.3s ease", opacity: fade ? 1 : 0 }}>
-      {techs[index].name}
-    </span>
-  );
-};
-
-// ─── COUNTER ─────────────────────────────────────────────────
-const Counter = ({ end, suffix = "", duration = 2000 }) => {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const [started, setStarted] = useState(false);
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !started) {
-        setStarted(true);
-        let s = 0; const inc = end / (duration / 16);
-        const t = setInterval(() => { s += inc; if (s >= end) { setCount(end); clearInterval(t); } else setCount(Math.floor(s)); }, 16);
-      }
-    }, { threshold: 0.5 });
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [end, duration, started]);
-  return <span ref={ref}>{count}{suffix}</span>;
-};
-
-// ─── CODE EDITOR ─────────────────────────────────────────────
-const CodeEditor = () => {
-  const [displayedLines, setDisplayedLines] = useState(0);
-  const codeLines = [
-    { indent: 0, tokens: [{ text: "<", c: "#7C7C7C" }, { text: "section", c: "#FF7B72" }, { text: ' class="', c: "#7C7C7C" }, { text: "hero", c: "#A5D6FF" }, { text: '"', c: "#7C7C7C" }, { text: ">", c: "#7C7C7C" }] },
-    { indent: 1, tokens: [{ text: "<", c: "#7C7C7C" }, { text: "h1", c: "#FF7B72" }, { text: ">", c: "#7C7C7C" }, { text: "Din bedrift", c: "#E6EDF3" }, { text: "</", c: "#7C7C7C" }, { text: "h1", c: "#FF7B72" }, { text: ">", c: "#7C7C7C" }] },
-    { indent: 1, tokens: [{ text: "<", c: "#7C7C7C" }, { text: "p", c: "#FF7B72" }, { text: ">", c: "#7C7C7C" }, { text: "Fortjener en", c: "#E6EDF3" }, { text: "</", c: "#7C7C7C" }, { text: "p", c: "#FF7B72" }, { text: ">", c: "#7C7C7C" }] },
-    { indent: 1, tokens: [{ text: "<", c: "#7C7C7C" }, { text: "span", c: "#FF7B72" }, { text: ' class="', c: "#7C7C7C" }, { text: "accent", c: "#A5D6FF" }, { text: '"', c: "#7C7C7C" }, { text: ">", c: "#7C7C7C" }] },
-    { indent: 2, tokens: [{ text: "moderne nettside", c: "#E879F9" }] },
-    { indent: 1, tokens: [{ text: "</", c: "#7C7C7C" }, { text: "span", c: "#FF7B72" }, { text: ">", c: "#7C7C7C" }] },
-    { indent: 0, tokens: [{ text: "</", c: "#7C7C7C" }, { text: "section", c: "#FF7B72" }, { text: ">", c: "#7C7C7C" }] },
-  ];
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDisplayedLines(prev => { if (prev >= codeLines.length) { setTimeout(() => setDisplayedLines(0), 2000); return prev; } return prev + 1; });
-    }, 600);
-    return () => clearInterval(interval);
-  }, []);
-  return (
-    <div style={{ borderRadius: "10px", border: "1px solid rgba(255,255,255,0.07)", background: "rgba(18,17,19,0.9)", overflow: "hidden" }}>
-      <div style={{ padding: "5px 8px", display: "flex", alignItems: "center", gap: "3px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-        <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#FF5F57" }} />
-        <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#FEBC2E" }} />
-        <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#28C840" }} />
-        <span style={{ marginLeft: "6px", fontFamily: "'JetBrains Mono', monospace", fontSize: "0.35rem", color: "rgba(255,255,255,0.25)" }}>index.html</span>
-      </div>
-      <div style={{ padding: "8px", minHeight: "85px" }}>
-        {codeLines.slice(0, displayedLines).map((line, i) => (
-          <div key={i} style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.4rem", lineHeight: 2, display: "flex", paddingLeft: `${line.indent * 9}px`, animation: "fadeInUp 0.3s ease both" }}>
-            <span style={{ color: "rgba(255,255,255,0.12)", width: "12px", display: "inline-block", userSelect: "none" }}>{i + 1}</span>
-            {line.tokens.map((tok, j) => <span key={j} style={{ color: tok.c }}>{tok.text}</span>)}
-          </div>
-        ))}
-        {displayedLines < codeLines.length && (
-          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.4rem", lineHeight: 2, paddingLeft: `${(codeLines[displayedLines]?.indent || 0) * 9 + 12}px` }}>
-            <span style={{ display: "inline-block", width: "4px", height: "7px", background: "#E879F9", animation: "cursorBlink 1s step-end infinite" }} />
-          </div>
-        )}
-      </div>
+// ─── Kort 1: FØR – tungvint Excel-skjema ────────────────────
+const BeforeCard = () => (
+  <div className="home-card home-before" aria-hidden="true">
+    <div className="home-card-bar">
+      <i style={{ background: "#FF5F57" }} /><i style={{ background: "#FEBC2E" }} /><i style={{ background: "#28C840" }} />
+      <span className="home-url">FØR · Excel-skjema</span>
     </div>
-  );
-};
-
-// ─── ANIMATED KEYBOARD ───────────────────────────────────────
-const AnimatedKeyboard = () => {
-  const [activeKey, setActiveKey] = useState(null);
-  const rows = [
-    ["Q","W","E","R","T","Y","U","I","O","P"],
-    ["A","S","D","F","G","H","J","K","L"],
-    ["Z","X","C","V","B","N","M"],
-  ];
-  const sequence = ["N","E","T","T","S","I","D","E"];
-
-  useEffect(() => {
-    let running = true;
-    const playSequence = () => {
-      let i = 0;
-      const iv = setInterval(() => {
-        if (!running) { clearInterval(iv); return; }
-        setActiveKey(sequence[i]);
-        setTimeout(() => setActiveKey(null), 220);
-        i++;
-        if (i >= sequence.length) { clearInterval(iv); if (running) setTimeout(playSequence, 2500); }
-      }, 340);
-    };
-    setTimeout(playSequence, 800);
-    return () => { running = false; };
-  }, []);
-
-  return (
-    <div style={{ borderRadius: "10px", border: "1px solid rgba(255,255,255,0.05)", background: "linear-gradient(180deg, rgba(24,22,23,0.95), rgba(20,18,19,0.98))", padding: "8px 6px 6px" }}>
-      {rows.map((row, ri) => (
-        <div key={ri} style={{ display: "flex", justifyContent: "center", gap: "2px", marginBottom: ri < rows.length - 1 ? "2px" : 0, paddingLeft: ri === 1 ? "5px" : ri === 2 ? "12px" : 0, paddingRight: ri === 1 ? "5px" : ri === 2 ? "12px" : 0 }}>
-          {row.map(key => {
-            const isActive = activeKey === key;
-            return (
-              <div key={key} style={{
-                width: "15px", height: "15px", borderRadius: "3px", display: "flex", alignItems: "center", justifyContent: "center",
-                fontFamily: "'JetBrains Mono', monospace", fontSize: "0.3rem", fontWeight: 500,
-                color: isActive ? "#fff" : "rgba(255,255,255,0.3)",
-                background: isActive ? "linear-gradient(180deg, #E879F9, #A855F7)" : "linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))",
-                border: isActive ? "1px solid #E879F9" : "1px solid rgba(255,255,255,0.05)",
-                boxShadow: isActive ? "0 0 5px rgba(232,121,249,0.4), 0 1px 2px rgba(0,0,0,0.3)" : "0 1px 2px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.03)",
-                transform: isActive ? "translateY(1px) scale(0.94)" : "translateY(0)",
-                transition: "all 0.12s cubic-bezier(0.4, 0, 0.2, 1)",
-              }}>{key}</div>
-            );
-          })}
-        </div>
+    <div className="home-sheet">
+      {Array.from({ length: 20 }).map((_, i) => (
+        <span key={i} className={i < 4 ? "head" : ""} />
       ))}
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "2px" }}>
-        <div style={{ width: "85px", height: "13px", borderRadius: "3px", background: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02))", border: "1px solid rgba(255,255,255,0.05)", boxShadow: "0 1px 2px rgba(0,0,0,0.2)" }} />
-      </div>
     </div>
-  );
-};
+  </div>
+);
 
-// ─── PORTFOLIO CARD ──────────────────────────────────────────
-const PortfolioCard = ({ title, category, gradient, icon, delay, href }) => {
-  const [hovered, setHovered] = useState(false);
-  const Wrapper = href ? "a" : "div";
-  const wrapperProps = href ? { href, target: "_blank", rel: "noopener noreferrer" } : {};
-  return (
-    <Wrapper {...wrapperProps} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
-      style={{ display: "block", borderRadius: "16px", background: gradient, padding: "1.5px", animation: `fadeInUp 0.8s ease ${delay}s both`, cursor: "pointer", textDecoration: "none", color: "inherit" }}>
-      <div style={{
-        borderRadius: "15px", background: "#171516", padding: "28px 24px", height: "100%",
-        transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)", transform: hovered ? "scale(0.98)" : "scale(1)",
-        position: "relative", overflow: "hidden",
-      }}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, background: gradient, opacity: hovered ? 0.06 : 0, transition: "opacity 0.5s ease" }} />
-        <div style={{ fontSize: "2.5rem", marginBottom: "14px", transition: "transform 0.5s ease", transform: hovered ? "scale(1.12) rotate(-5deg)" : "none" }}>{icon}</div>
-        <div style={{ fontSize: "0.6rem", color: "#E879F9", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>{category}</div>
-        <div style={{ fontSize: "1.1rem", fontFamily: "'Outfit', sans-serif", fontWeight: 600, color: "#fff", lineHeight: 1.3 }}>{title}</div>
+// ─── Kort 2: ETTER – egen digital løsning ───────────────────
+const AfterCard = () => (
+  <div className="home-card home-shot" aria-hidden="true">
+    <span className="home-tag">ETTER · EGEN LØSNING</span>
+    <div className="home-app-head">Rapporter</div>
+    {[
+      { t: "Servicerapport", s: "Godkjent", ok: true },
+      { t: "Avviksmelding", s: "Venter", ok: false },
+      { t: "Timeliste", s: "Godkjent", ok: true },
+    ].map((r) => (
+      <div className="home-app-row" key={r.t}>
+        <span className="home-app-dot" />
+        <span className="home-app-title">{r.t}</span>
+        <span className={`home-chip${r.ok ? " ok" : ""}`}>{r.ok ? "✓ " : ""}{r.s}</span>
       </div>
-    </Wrapper>
-  );
-};
+    ))}
+  </div>
+);
 
-// ─── MAIN ────────────────────────────────────────────────────
-export default function SolutionsByLangaasV2() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [scrollY, setScrollY] = useState(0);
+// ─── Kort 3: idé → prototype ────────────────────────────────
+const IdeaCard = () => (
+  <div className="home-card home-chat" aria-hidden="true">
+    <div className="home-chat-head"><span className="home-chat-icon">✦</span> FRA IDÉ TIL PROTOTYPE <span className="home-chat-dots">•••</span></div>
+    <div className="home-bubble home-bubble-user">Excel-skjemaene tar altfor mye tid.</div>
+    <div className="home-bubble home-bubble-ai">Da bygger vi noe enklere. Fortell mer.</div>
+    <div className="home-chat-row"><code>idé</code> Digitale rapporter <b>✓</b></div>
+    <div className="home-chat-row"><code>prototype</code> Klar til å teste <b>✓</b></div>
+  </div>
+);
 
-  useEffect(() => {
-    const hm = (e) => setMousePos({ x: e.clientX, y: e.clientY });
-    const hs = () => setScrollY(window.scrollY);
-    window.addEventListener("mousemove", hm);
-    window.addEventListener("scroll", hs);
-    return () => { window.removeEventListener("mousemove", hm); window.removeEventListener("scroll", hs); };
-  }, []);
-
+export default function Home() {
   return (
-    <div style={{ minHeight: "100vh", background: "#171516", color: "#fff", fontFamily: "'Outfit', sans-serif", overflowX: "hidden" }}>
+    <div className="home">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #171516; }
-        ::selection { background: #E879F9; color: #171516; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.15); } }
-        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        @keyframes chatSlideUp { from { opacity: 0; transform: translateY(16px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        @keyframes typingDot { 0%, 60%, 100% { transform: translateY(0); opacity: 0.3; } 30% { transform: translateY(-5px); opacity: 1; } }
-        @keyframes cursorBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-        .hero-title { font-size: clamp(2.4rem, 6.5vw, 5.5rem); font-family: 'Outfit', sans-serif; font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; }
-        .gradient-text {
-          background: linear-gradient(135deg, #E879F9 0%, #F0ABFC 30%, #C084FC 60%, #A855F7 100%);
-          background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-          background-clip: text; animation: gradientShift 5s ease infinite;
+        .home { position: relative; min-height: 100dvh; display: flex; flex-direction: column; overflow-x: hidden; }
+        .home-main {
+          flex: 1; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: center;
+          gap: clamp(24px, 4vw, 64px); padding: 96px clamp(20px, 4vw, 56px) 24px; width: 100%; max-width: 1400px; margin: 0 auto;
         }
-        .accent2 { color: #38BDF8; }
-        .accent3 { color: #34D399; }
-        .nav-link { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.78rem; font-family: 'Outfit', sans-serif; transition: color 0.3s; cursor: pointer; font-weight: 400; letter-spacing: 0.02em; }
-        .nav-link:hover { color: #E879F9; }
-        .cta-btn {
-          padding: 12px 28px; border-radius: 50px; border: none;
-          background: linear-gradient(135deg, #E879F9 0%, #A855F7 100%);
-          color: #fff; font-weight: 600; font-size: 0.82rem; font-family: 'Outfit', sans-serif;
-          cursor: pointer; transition: all 0.3s ease; letter-spacing: 0.01em;
+        .home-eyebrow { display: flex; align-items: center; gap: 14px; font-family: var(--mono); font-size: .72rem; letter-spacing: .2em; color: #a89bff; text-transform: uppercase; animation: fadeInUp .6s ease both; }
+        .home-eyebrow::before { content: ""; width: 28px; height: 1px; background: #a89bff; }
+        .home-title {
+          font-weight: 800; letter-spacing: -.04em; line-height: .98; margin: 22px 0 0;
+          font-size: clamp(2.4rem, min(5.8vw, 9vh), 5.2rem); animation: fadeInUp .6s ease .1s both;
         }
-        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,121,249,0.3); }
-        .cta-outline {
-          padding: 12px 28px; border-radius: 50px; border: 1px solid rgba(232,121,249,0.25);
-          background: transparent; color: #E879F9; font-weight: 500; font-size: 0.82rem;
-          font-family: 'Outfit', sans-serif; cursor: pointer; transition: all 0.3s ease;
+        .home-title .grad { background: linear-gradient(95deg, #a78bfa 0%, #f0abfc 40%, #fdba74 75%, #bef264 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .home-sub { max-width: 500px; color: var(--muted); font-size: clamp(.95rem, 1.5vh + .4rem, 1.12rem); line-height: 1.65; font-weight: 300; margin: clamp(16px, 3vh, 30px) 0; animation: fadeInUp .6s ease .25s both; }
+        .home-sub b { color: #fff; font-weight: 500; }
+        .home-pills { display: flex; flex-wrap: wrap; gap: 12px; animation: fadeInUp .6s ease .4s both; }
+        .home-pill {
+          display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 999px; text-decoration: none;
+          border: 1px solid var(--line); background: rgba(255,255,255,.06); backdrop-filter: blur(10px);
+          font-size: .9rem; font-weight: 500; transition: transform .3s, border-color .3s, background .3s;
         }
-        .cta-outline:hover { background: rgba(232,121,249,0.06); border-color: #E879F9; }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(232,121,249,0.2); border-radius: 3px; }
+        .home-pill i { font-style: normal; font-family: var(--mono); font-size: .65rem; color: #a89bff; }
+        .home-pill:hover { transform: translateY(-2px); border-color: rgba(232,121,249,.45); background: rgba(232,121,249,.1); }
+        .home-pill.primary { background: linear-gradient(135deg, #e879f9, #a855f7); border-color: transparent; }
+        .home-pill.primary i { color: rgba(255,255,255,.75); }
 
-        @media (max-width: 768px) {
-          .cursor-glow { display: none !important; }
-          .main-nav { padding: 12px 20px !important; }
-          .nav-links-desktop { display: none !important; }
-          .nav-right { gap: 0 !important; }
-          .hero-section { padding: 100px 20px 60px !important; min-height: auto !important; }
-          .hero-flex { flex-direction: column !important; gap: 40px !important; }
-          .hero-left { flex: 1 1 100% !important; }
-          .hero-right { flex: 1 1 100% !important; }
-          .hero-title { font-size: clamp(1.8rem, 8vw, 2.8rem) !important; }
-          .hero-badge-bottom { display: none !important; }
-          .scroll-indicator { display: none !important; }
-          .marquee-section { padding: 12px 0 !important; }
-          .stats-grid { grid-template-columns: repeat(2, 1fr) !important; padding: 40px 20px !important; }
-          .services-section { padding: 60px 20px !important; }
-          .services-header { flex-direction: column !important; gap: 24px !important; align-items: flex-start !important; }
-          .services-header h2 { font-size: clamp(1.5rem, 6vw, 2.2rem) !important; }
-          .services-grid { grid-template-columns: 1fr !important; }
-          .trust-section { padding: 0 20px 20px !important; }
-          .trust-image-wrap { height: 200px !important; }
-          .portfolio-section { padding: 60px 20px 80px !important; }
-          .portfolio-grid { grid-template-columns: 1fr !important; }
-          .pricing-section { padding: 60px 20px !important; }
-          .pricing-grid { grid-template-columns: 1fr !important; }
-          .cta-section { padding: 60px 20px !important; }
-          .cta-section h2 { font-size: clamp(1.5rem, 6vw, 2.2rem) !important; }
-          .main-footer { padding: 40px 20px 24px !important; flex-direction: column !important; align-items: center !important; text-align: center !important; }
-          .footer-logo { font-size: 2.4rem !important; }
-          .footer-links { flex-direction: column !important; gap: 24px !important; align-items: center !important; }
-          .footer-bottom { padding: 16px 20px 24px !important; }
+        /* Scene til høyre */
+        .home-stage { position: relative; justify-self: end; width: min(100%, 620px, calc((100dvh - 190px) * 1.12)); aspect-ratio: 1.12 / 1; animation: fadeInUp .8s ease .35s both; }
+        .home-card { position: absolute; border-radius: 16px; border: 1px solid rgba(255,255,255,.1); background: rgba(24,20,42,.82); backdrop-filter: blur(14px); box-shadow: 0 24px 60px rgba(0,0,0,.45); overflow: hidden; }
+        .home-before { top: 0; left: 2%; width: 50%; animation: float 8s ease-in-out -2s infinite; z-index: 3; }
+        .home-shot { top: 28%; right: 0; width: 72%; padding: 44px 16px 14px; animation: float 7s ease-in-out infinite; }
+        .home-chat { right: 3%; bottom: 0; width: 58%; padding: 14px; animation: float 9s ease-in-out -4s infinite; z-index: 4; }
+
+        .home-card-bar { display: flex; align-items: center; gap: 5px; padding: 9px 12px; border-bottom: 1px solid rgba(255,255,255,.06); }
+        .home-card-bar i { width: 7px; height: 7px; border-radius: 50%; }
+        .home-url { margin-left: 8px; font-family: var(--mono); font-size: .62rem; color: rgba(255,255,255,.45); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .home-sheet { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; padding: 12px; background: rgba(255,255,255,.02); }
+        .home-sheet span { height: 14px; border-radius: 2px; background: rgba(255,255,255,.07); }
+        .home-sheet span.head { background: rgba(255,255,255,.16); }
+
+        .home-tag { position: absolute; top: 12px; left: 16px; font-family: var(--mono); font-size: .6rem; letter-spacing: .12em; color: #a89bff; }
+        .home-app-head { font-weight: 700; font-size: 1rem; margin-bottom: 10px; }
+        .home-app-row { display: flex; align-items: center; gap: 10px; padding: 9px 11px; margin-bottom: 6px; border-radius: 10px; background: rgba(255,255,255,.05); font-size: .78rem; }
+        .home-app-dot { width: 8px; height: 8px; border-radius: 50%; background: #7c5cff; flex: none; }
+        .home-app-title { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .home-chip { font-size: .62rem; padding: 3px 9px; border-radius: 999px; background: rgba(253,186,116,.16); color: #fdba74; white-space: nowrap; }
+        .home-chip.ok { background: rgba(190,242,100,.15); color: #bef264; }
+        .home-app-foot { margin-top: 10px; font-family: var(--mono); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.35); }
+
+        .home-chat-head { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: .58rem; letter-spacing: .12em; color: rgba(255,255,255,.5); margin-bottom: 10px; }
+        .home-chat-icon { width: 20px; height: 20px; border-radius: 6px; background: #5b3df5; display: grid; place-items: center; color: #fff; font-size: .65rem; }
+        .home-chat-dots { margin-left: auto; }
+        .home-bubble { padding: 8px 12px; border-radius: 12px; font-size: .74rem; line-height: 1.4; margin-bottom: 7px; max-width: 92%; }
+        .home-bubble-user { background: #5b3df5; margin-left: auto; border-bottom-right-radius: 4px; }
+        .home-bubble-ai { background: rgba(255,255,255,.08); border-bottom-left-radius: 4px; }
+        .home-chat-row { display: flex; align-items: center; gap: 8px; padding: 6px 10px; margin-top: 5px; border-radius: 8px; background: rgba(255,255,255,.05); font-size: .62rem; color: rgba(255,255,255,.6); }
+        .home-chat-row code { font-family: var(--mono); color: #a89bff; background: rgba(124,92,255,.18); padding: 1px 6px; border-radius: 4px; }
+        .home-chat-row b { margin-left: auto; width: 16px; height: 16px; border-radius: 50%; background: #bef264; color: #14210a; display: grid; place-items: center; font-size: .6rem; }
+
+        /* Bunnlinje */
+        .home-foot { display: flex; align-items: center; gap: 20px; padding: 18px clamp(20px, 4vw, 56px) 22px; padding-right: max(96px, 4vw); margin: 0 auto; width: 100%; max-width: 1400px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: .68rem; letter-spacing: .15em; color: rgba(255,255,255,.4); text-transform: uppercase; }
+        .home-foot ul { list-style: none; display: flex; flex-wrap: nowrap; gap: 14px; overflow: hidden; white-space: nowrap; }
+        .home-foot li + li::before { content: "✦"; color: #7c5cff; margin-right: 14px; }
+
+        /* Hele forsiden skal passe på én skjerm uten scrolling */
+        @media (min-width: 901px) and (min-height: 600px) {
+          .home { height: 100dvh; overflow: hidden; }
         }
+
+        @media (max-width: 900px) {
+          .home-main { grid-template-columns: 1fr; align-content: center; gap: 20px; padding-top: 80px; }
+          .home-eyebrow { font-size: .6rem; letter-spacing: .12em; white-space: nowrap; }
+          .home-eyebrow::before { width: 16px; }
+          .home-title { font-size: clamp(2.2rem, min(10.5vw, 7vh), 3.5rem); margin-top: 14px; }
+          .home-stage { justify-self: stretch; width: 100%; aspect-ratio: auto; height: clamp(140px, 22vh, 240px); }
+          .home-before, .home-chat { display: none; }
+          .home-shot { position: relative; top: 0; width: 100%; height: 100%; animation: none; padding-top: 38px; }
+          .home-app-row:nth-of-type(n+3) { display: none; }
+          .home-pills { gap: 10px; }
+          .home-pill { padding: 11px 16px; font-size: .85rem; }
+          .home-foot { padding: 14px 84px 18px 20px; }
+        }
+        @media (max-width: 900px) and (max-height: 700px) { .home-stage { display: none; } }
       `}</style>
 
-      {/* Cursor glow */}
-      <div className="cursor-glow" style={{ position: "fixed", width: "350px", height: "350px", borderRadius: "50%", background: "radial-gradient(circle, rgba(232,121,249,0.04) 0%, transparent 70%)", left: mousePos.x - 175, top: mousePos.y - 175, pointerEvents: "none", zIndex: 0, transition: "left 0.4s ease, top 0.4s ease" }} />
+      <SiteNav />
 
-      {/* ── NAV ── */}
-      <nav className="main-nav" style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "14px 36px",
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        background: scrollY > 50 ? "rgba(20,18,19,0.92)" : "transparent",
-        backdropFilter: scrollY > 50 ? "blur(20px)" : "none",
-        borderBottom: scrollY > 50 ? "1px solid rgba(255,255,255,0.04)" : "none",
-        transition: "all 0.3s ease",
-      }}>
-        <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "1.5rem", letterSpacing: "0.08em" }}>
-          <span className="gradient-text">SBL</span>
-        </div>
-        <div className="nav-right" style={{ display: "flex", alignItems: "center", gap: "36px" }}>
-          <Link to="/tjenester" className="nav-link nav-links-desktop">Tjenester</Link>
-          <Link to="/prosjekter" className="nav-link nav-links-desktop">Prosjekter</Link>
-          <Link to="/priser" className="nav-link nav-links-desktop">Priser</Link>
-          <Link to="/kontakt" className="cta-btn" style={{ padding: "8px 20px", fontSize: "0.75rem", textDecoration: "none" }}>Kontakt meg</Link>
-        </div>
-      </nav>
-
-      {/* ── HERO ── */}
-      <section className="hero-section" style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "140px 48px 100px", maxWidth: "1200px", margin: "0 auto", position: "relative" }}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, backgroundImage: "linear-gradient(rgba(232,121,249,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(232,121,249,0.02) 1px, transparent 1px)", backgroundSize: "70px 70px", pointerEvents: "none" }} />
-
-        <div className="hero-flex" style={{ display: "flex", alignItems: "center", gap: "80px", width: "100%", position: "relative", zIndex: 1 }}>
-          {/* Left */}
-          <div className="hero-left" style={{ flex: "1 1 50%" }}>
-            <div style={{
-              display: "inline-flex", alignItems: "center", gap: "8px", padding: "7px 16px",
-              borderRadius: "50px", border: "1px solid rgba(232,121,249,0.15)", background: "rgba(232,121,249,0.04)",
-              marginBottom: "36px", width: "fit-content", animation: "fadeInUp 0.6s ease both",
-            }}>
-              <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#E879F9", animation: "pulse 2s infinite" }} />
-              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.68rem", color: "#E879F9", letterSpacing: "0.04em" }}>
-                Webdesign — For Lokale Bedrifter
-              </span>
-            </div>
-
-            <h1 className="hero-title" style={{ animation: "fadeInUp 0.6s ease 0.1s both" }}>
-              Jeg bygger<br />
-              <span className="gradient-text">nettsider</span> som<br />
-              gjør inntrykk<span style={{ color: "#E879F9" }}>.</span>
-            </h1>
-
-            <p style={{
-              fontSize: "0.95rem", color: "rgba(255,255,255,0.4)", maxWidth: "440px", lineHeight: 1.8,
-              margin: "32px 0 44px", animation: "fadeInUp 0.6s ease 0.25s both", fontWeight: 300,
-            }}>
-              Fra konsept til lansering på under en uke. Moderne, raske nettsider
-              for restauranter, håndverkere og lokale bedrifter – fra <span style={{ color: "#38BDF8", fontWeight: 500 }}>2.999 kr</span>.
-            </p>
-
-            <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", animation: "fadeInUp 0.6s ease 0.4s both" }}>
-              <button className="cta-btn">Se mine prosjekter →</button>
-              <button className="cta-outline">Gratis konsultasjon</button>
-            </div>
-          </div>
-
-          {/* Right: hero mockup image */}
-          <div className="hero-right" style={{
-            flex: "1 1 45%",
-            animation: "fadeInUp 0.8s ease 0.5s both",
-            position: "relative",
-          }}>
-            {/* Glow behind image */}
-            <div style={{
-              position: "absolute",
-              top: "50%", left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "80%", height: "80%",
-              borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(232,121,249,0.08) 0%, rgba(56,189,248,0.04) 40%, transparent 70%)",
-              filter: "blur(40px)",
-              pointerEvents: "none",
-            }} />
-            <img
-              src="/hero-mockup.png"
-              alt="Laptop og mobil med nettsider laget av Solutions by Langaas"
-              style={{
-                width: "100%",
-                borderRadius: "16px",
-                position: "relative",
-                zIndex: 1,
-                boxShadow: "0 24px 64px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04)",
-              }}
-            />
-            {/* Small floating badge on image */}
-            <div className="hero-badge-bottom" style={{
-              position: "absolute",
-              bottom: "-14px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              zIndex: 2,
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-              padding: "6px 14px",
-              borderRadius: "50px",
-              background: "rgba(23,21,22,0.95)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              backdropFilter: "blur(10px)",
-              boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
-            }}>
-              <span style={{ fontSize: "0.6rem", fontFamily: "'JetBrains Mono', monospace", color: "rgba(255,255,255,0.5)" }}>
-                Ekte prosjekter
-              </span>
-              <span style={{ fontSize: "0.5rem", color: "#E879F9" }}>●</span>
-              <span style={{ fontSize: "0.6rem", fontFamily: "'JetBrains Mono', monospace", color: "rgba(255,255,255,0.5)" }}>
-                Ekte resultater
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="scroll-indicator" style={{ position: "absolute", bottom: "44px", left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", animation: "fadeInUp 1s ease 1s both" }}>
-          <span style={{ fontSize: "0.6rem", color: "rgba(255,255,255,0.2)", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em" }}>SCROLL</span>
-          <div style={{ width: "1px", height: "36px", background: "linear-gradient(180deg, rgba(232,121,249,0.4), transparent)", animation: "pulse 2s infinite" }} />
-        </div>
-      </section>
-
-      {/* ── MARQUEE ── */}
-      <div className="marquee-section" style={{ overflow: "hidden", borderTop: "1px solid rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.04)", padding: "16px 0" }}>
-        <div style={{ display: "flex", gap: "60px", animation: "marquee 22s linear infinite", whiteSpace: "nowrap", width: "fit-content" }}>
-          {[...Array(2)].map((_, rep) =>
-            ["WEBDESIGN", "UTVIKLING", "SEO", "AI-CHAT", "RESPONSIVT", "RASK LEVERING", "HOSTING", "VEDLIKEHOLD"].map((text, i) => (
-              <span key={`${rep}-${i}`} style={{
-                fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.2em",
-                color: [0,2,4,6].includes(i) ? "rgba(255,255,255,0.1)" : [1,5].includes(i) ? "rgba(232,121,249,0.2)" : [3,7].includes(i) ? "rgba(56,189,248,0.2)" : "rgba(52,211,153,0.2)",
-                display: "flex", alignItems: "center", gap: "16px",
-              }}>
-                {text}<span style={{ fontSize: "0.35rem", color: "rgba(232,121,249,0.2)" }}>◆</span>
-              </span>
-            ))
-          )}
-        </div>
-      </div>
-
-      {/* ── STATS ── */}
-      <section className="stats-grid" style={{ padding: "90px 48px", maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1px", background: "rgba(255,255,255,0.04)", borderRadius: "16px", overflow: "hidden" }}>
-        {[
-          { tech: true, label: "Teknologier", color: "#E879F9" },
-          { num: 7, suffix: " dager", label: "Snitt levering", color: "#38BDF8" },
-          { num: 2999, suffix: " kr", label: "Startpris", color: "#34D399" },
-          { num: 100, suffix: "%", label: "Fornøyde kunder", color: "#F59E0B" },
-        ].map((stat, i) => (
-          <div key={i} style={{ background: "#171516", padding: "36px 20px", textAlign: "center" }}>
-            <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "2.1rem", color: stat.color, marginBottom: "6px" }}>
-              {stat.tech ? <TechCycler /> : <Counter end={stat.num} suffix={stat.suffix} />}
-            </div>
-            <div style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.3)", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.04em" }}>{stat.label}</div>
-          </div>
-        ))}
-      </section>
-
-      {/* ── SERVICES ── */}
-      <section className="services-section" style={{ padding: "120px 48px", maxWidth: "1200px", margin: "0 auto" }}>
-        <div className="services-header" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "48px", marginBottom: "56px" }}>
-          <div>
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#E879F9", letterSpacing: "0.2em", textTransform: "uppercase" }}>TJENESTER</span>
-            <h2 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "clamp(2.4rem, 5vw, 4rem)", marginTop: "10px", lineHeight: 1.05 }}>
-              Alt din bedrift<br />trenger på nett<span style={{ color: "#E879F9" }}>.</span>
-            </h2>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "6px", maxWidth: "240px" }}>
-            <CodeEditor />
-            <AnimatedKeyboard />
-          </div>
-        </div>
-        <div className="services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "14px" }}>
-          {[
-            { icon: "🍽️", title: "Restaurant-sider", desc: "Interaktive menyer, booking og atmosfærisk design som får gjester i døren.", accent: "#E879F9", href: "https://showcase-hub-black.vercel.app/restauranter" },
-            { icon: "🔨", title: "Håndverker-sider", desc: "Profesjonelle sider som viser frem arbeidet ditt og genererer leads.", accent: "#38BDF8" },
-            { icon: "🏪", title: "Butikk & Retail", desc: "Moderne nettsider som synliggjør produkter, åpningstider og lokasjon.", accent: "#34D399" },
-            { icon: "🤖", title: "AI-integrasjoner", desc: "Smarte chatboter og AI-verktøy som gir kundene dine svar 24/7.", accent: "#F59E0B" },
-          ].map((s, i) => {
-            const Tag = s.href ? "a" : "div";
-            const linkProps = s.href ? { href: s.href, target: "_blank", rel: "noopener noreferrer" } : {};
-            return (
-              <Tag key={i} {...linkProps} style={{
-                padding: "32px 28px", borderRadius: "14px", border: "1px solid rgba(255,255,255,0.05)",
-                background: "rgba(255,255,255,0.015)", transition: "all 0.4s ease", cursor: "pointer", textDecoration: "none", color: "inherit",
-              }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = `${s.accent}30`; e.currentTarget.style.background = `${s.accent}06`; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)"; e.currentTarget.style.background = "rgba(255,255,255,0.015)"; }}
-              >
-                <div style={{ fontSize: "1.8rem", marginBottom: "14px" }}>{s.icon}</div>
-                <h3 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 600, fontSize: "1.05rem", marginBottom: "8px" }}>{s.title}</h3>
-                <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.4)", lineHeight: 1.6 }}>{s.desc}</p>
-              </Tag>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ── TRUST IMAGE ── */}
-      <section className="trust-section" style={{ padding: "0 48px 20px", maxWidth: "1200px", margin: "0 auto" }}>
-        <div className="trust-image-wrap" style={{
-          position: "relative",
-          borderRadius: "20px",
-          overflow: "hidden",
-          height: "340px",
-        }}>
-          <img
-            src="/trust-handshake.png"
-            alt="Fornøyd kunde og utvikler tar hverandre i hånda foran en laptop"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center 30%",
-              display: "block",
-            }}
-          />
-          {/* Dark overlay */}
-          <div style={{
-            position: "absolute",
-            top: 0, left: 0, right: 0, bottom: 0,
-            background: "linear-gradient(135deg, rgba(23,21,22,0.7) 0%, rgba(23,21,22,0.3) 50%, rgba(23,21,22,0.7) 100%)",
-          }} />
-        </div>
-        <div style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "16px",
-        }}>
-          <div style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "8px",
-            padding: "8px 16px",
-            borderRadius: "50px",
-            background: "rgba(255,255,255,0.03)",
-            border: "1px solid rgba(255,255,255,0.08)",
-          }}>
-            <span style={{ fontSize: "0.9rem" }}>🤝</span>
-            <span style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontSize: "0.78rem",
-              color: "rgba(255,255,255,0.5)",
-              fontWeight: 500,
-            }}>
-              Fra første prat til ferdig nettside — jeg er med deg hele veien
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* ── PORTFOLIO ── */}
-      <section className="portfolio-section" style={{ padding: "80px 48px 120px", maxWidth: "1200px", margin: "0 auto" }}>
-        <div style={{ marginBottom: "40px" }}>
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#38BDF8", letterSpacing: "0.2em", textTransform: "uppercase" }}>PROSJEKTER</span>
-          <h2 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "clamp(1.7rem, 3.5vw, 2.8rem)", marginTop: "10px", lineHeight: 1.1 }}>
-            Se hva jeg har bygd<span style={{ color: "#38BDF8" }}>.</span>
-          </h2>
-          <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.85rem", marginTop: "12px", lineHeight: 1.6 }}>
-            Håndskrevet kode for hver kunde. Ingen maler, ingen dra-og-slipp.
+      <main className="home-main">
+        <section>
+          <div className="home-eyebrow">Nettsider · Apper · Digitale systemer</div>
+          <h1 className="home-title">
+            Har du en idé<br />
+            eller et problem?<br />
+            <span className="grad">Jeg løser det digitalt.</span>
+          </h1>
+          <p className="home-sub">
+            Jeg er Martin Langaas. Med bakgrunn fra teknisk arbeid og service vet jeg hvordan ting faktisk fungerer ute i bedrifter. <b>Du snakker direkte med den som bygger løsningen.</b>
           </p>
-        </div>
+          <div className="home-pills">
+            <Link to="/kontakt" className="home-pill primary"><i>01</i> Snakk med Martin</Link>
+            <Link to="/om" className="home-pill"><i>02</i> Slik jobber jeg</Link>
+          </div>
+        </section>
 
-        {/* Bottom: cards side by side */}
-        <div className="portfolio-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "14px" }}>
-          <PortfolioCard icon="🍔" category="Restaurant" title="Diner 22 — Interaktiv neon-meny" gradient="linear-gradient(135deg, #E879F9, #F59E0B)" delay={0.1} href="https://diner22-dlof.vercel.app/meny" />
-          <PortfolioCard icon="🔧" category="Håndverker" title="Snekker Nord — Portefølje & kontakt" gradient="linear-gradient(135deg, #38BDF8, #34D399)" delay={0.2} />
-          <PortfolioCard icon="⚖️" category="AI-plattform" title="harjegkravpå.no — Juridisk AI" gradient="linear-gradient(135deg, #A855F7, #E879F9)" delay={0.3} />
+        <div className="home-stage">
+          <BeforeCard />
+          <AfterCard />
+          <IdeaCard />
         </div>
-      </section>
+      </main>
 
-      {/* ── PRICING ── */}
-      <section className="pricing-section" style={{ padding: "120px 48px", maxWidth: "1200px", margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: "56px" }}>
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#34D399", letterSpacing: "0.2em", textTransform: "uppercase" }}>PRISER</span>
-          <h2 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "clamp(1.7rem, 3.5vw, 2.8rem)", marginTop: "10px" }}>
-            Enkelt og transparent<span style={{ color: "#34D399" }}>.</span>
-          </h2>
-        </div>
-        <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "14px", alignItems: "stretch" }}>
-          {/* Starter */}
-          <div style={{ borderRadius: "16px", border: "1px solid rgba(255,255,255,0.06)", padding: "36px 28px", display: "flex", flexDirection: "column" }}>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "14px" }}>STARTER</div>
-            <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "2.5rem", lineHeight: 1 }}>
-              2.999<span style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.35)" }}> kr</span>
-            </div>
-            <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.78rem", margin: "10px 0 22px" }}>Perfekt for oppstart</p>
-            {["Én-sides nettside", "Mobiloptimalisert", "Kontaktskjema", "Google Maps", "Levert på 5–7 dager"].map((f, i) => (
-              <div key={i} style={{ display: "flex", gap: "8px", alignItems: "center", padding: "7px 0", borderBottom: "1px solid rgba(255,255,255,0.03)", fontSize: "0.78rem", color: "rgba(255,255,255,0.5)" }}>
-                <span style={{ color: "#34D399", fontSize: "0.6rem" }}>✓</span>{f}
-              </div>
-            ))}
-            <div style={{ flex: 1 }} />
-            <button className="cta-outline" style={{ width: "100%", marginTop: "28px", borderColor: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)" }}>Velg Starter</button>
-          </div>
-          {/* Pro */}
-          <div style={{
-            borderRadius: "16px", border: "1px solid rgba(232,121,249,0.25)", padding: "36px 28px",
-            background: "linear-gradient(135deg, rgba(232,121,249,0.08) 0%, rgba(20,18,19,1) 100%)",
-            position: "relative", display: "flex", flexDirection: "column", boxShadow: "0 0 36px rgba(232,121,249,0.06)",
-          }}>
-            <div style={{
-              position: "absolute", top: "-1px", left: "50%", transform: "translateX(-50%)",
-              padding: "3px 14px", borderRadius: "0 0 8px 8px", background: "linear-gradient(135deg, #E879F9, #A855F7)",
-              color: "#fff", fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem", fontWeight: 600, letterSpacing: "0.1em",
-            }}>MEST POPULÆR</div>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", color: "#E879F9", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "14px" }}>PRO</div>
-            <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "2.5rem", lineHeight: 1 }}>
-              4.999<span style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.35)" }}> kr</span>
-            </div>
-            <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.78rem", margin: "10px 0 22px" }}>For bedrifter som vil vokse</p>
-            {["Alt i Starter +", "Flersides design", "SEO-optimalisering", "Sosiale medier", "Interaktive elementer", "Analytics dashboard"].map((f, i) => (
-              <div key={i} style={{ display: "flex", gap: "8px", alignItems: "center", padding: "7px 0", borderBottom: "1px solid rgba(232,121,249,0.05)", fontSize: "0.78rem", color: "rgba(255,255,255,0.6)" }}>
-                <span style={{ color: "#E879F9", fontSize: "0.6rem" }}>✓</span>{f}
-              </div>
-            ))}
-            <div style={{ flex: 1 }} />
-            <button className="cta-btn" style={{ width: "100%", marginTop: "28px" }}>Velg Pro</button>
-          </div>
-          {/* Enterprise */}
-          <div style={{ borderRadius: "16px", border: "1px solid rgba(255,255,255,0.06)", padding: "36px 28px", display: "flex", flexDirection: "column" }}>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "14px" }}>ENTERPRISE</div>
-            <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "2.5rem", lineHeight: 1 }}>Tilbud</div>
-            <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.78rem", margin: "10px 0 22px" }}>Skreddersydde løsninger</p>
-            {["Alt i Pro +", "AI-chatbot", "Booking-system", "Betalingsløsning", "Dedikert support", "Ubegrenset endringer"].map((f, i) => (
-              <div key={i} style={{ display: "flex", gap: "8px", alignItems: "center", padding: "7px 0", borderBottom: "1px solid rgba(255,255,255,0.03)", fontSize: "0.78rem", color: "rgba(255,255,255,0.5)" }}>
-                <span style={{ color: "#38BDF8", fontSize: "0.6rem" }}>✓</span>{f}
-              </div>
-            ))}
-            <div style={{ flex: 1 }} />
-            <Link to="/kontakt" className="cta-outline" style={{ width: "100%", marginTop: "28px", borderColor: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)", textDecoration: "none", textAlign: "center" }}>Kontakt meg</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
-      <section className="cta-section" style={{ padding: "120px 48px", maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
-        <h2 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 4.5vw, 3.2rem)", lineHeight: 1.1, marginBottom: "20px" }}>
-          Klar for å ta bedriften<br />din <span className="gradient-text">på nett</span>?
-        </h2>
-        <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.95rem", maxWidth: "440px", margin: "0 auto 36px", lineHeight: 1.6 }}>
-          Book en gratis 15-minutters konsultasjon. Jeg finner ut hva som passer best for din bedrift.
-        </p>
-        <div style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap" }}>
-          <Link to="/kontakt" className="cta-btn" style={{ fontSize: "0.9rem", padding: "14px 36px", textDecoration: "none" }}>Start prosjektet ditt →</Link>
-          <Link to="/kontakt" className="cta-outline" style={{ fontSize: "0.9rem", padding: "14px 36px", textDecoration: "none" }}>💬 Ta kontakt</Link>
-        </div>
-      </section>
-
-      {/* ── FOOTER ── */}
-      <footer className="main-footer" style={{ borderTop: "1px solid rgba(255,255,255,0.04)", padding: "56px 48px 36px", maxWidth: "1200px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "40px" }}>
-        <div>
-          <div className="footer-logo" style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "3.9rem", marginBottom: "12px", letterSpacing: "0.08em" }}>
-            <span className="gradient-text">SBL</span>
-          </div>
-          <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "0.78rem", maxWidth: "260px", lineHeight: 1.6 }}>
-            Solutions By Langaas
-          </p>
-          <p style={{ color: "rgba(255,255,255,0.15)", fontSize: "0.68rem", marginTop: "6px", fontFamily: "'JetBrains Mono', monospace" }}>
-            Org nr 936 977 774
-          </p>
-        </div>
-        <div className="footer-links" style={{ display: "flex", gap: "56px" }}>
-          <div>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.58rem", color: "rgba(255,255,255,0.25)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "14px" }}>Kontakt</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "6px", fontSize: "0.78rem", color: "rgba(255,255,255,0.4)" }}>
-              <span>hei@solutionsbylangaas.no</span>
-              <span>Mysen, Indre Østfold</span>
-            </div>
-          </div>
-          <div>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.58rem", color: "rgba(255,255,255,0.25)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "14px" }}>Lenker</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "6px", fontSize: "0.78rem", color: "rgba(255,255,255,0.4)" }}>
-              <span className="nav-link">Instagram</span>
-              <span className="nav-link">Facebook</span>
-            </div>
-          </div>
-        </div>
+      <footer className="home-foot">
+        <ul>
+          <li>Nettsider</li><li>Apper</li><li>Digitale systemer</li><li>Enklere arbeidsprosesser</li><li>AI-assistert utvikling</li>
+        </ul>
       </footer>
-      <div className="footer-bottom" style={{ textAlign: "center", padding: "20px 48px 36px", fontSize: "0.65rem", color: "rgba(255,255,255,0.15)", fontFamily: "'JetBrains Mono', monospace" }}>
-        © 2026 Solutions by Langaas. Laget med ❤️ i Mysen.
-      </div>
 
-      {/* ── AI CHAT ── */}
       <AIChatWidget />
     </div>
   );

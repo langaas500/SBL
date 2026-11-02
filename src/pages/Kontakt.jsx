@@ -1,24 +1,34 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import SiteNav from '../components/SiteNav'
 
 export default function Kontakt() {
   const [form, setForm] = useState({ navn: '', epost: '', telefon: '', melding: '' })
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState('idle') // idle | sending | sent | error
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    const subject = encodeURIComponent(`Henvendelse fra ${form.navn}`)
-    const body = encodeURIComponent(`Navn: ${form.navn}\nTelefon: ${form.telefon}\n\n${form.melding}`)
-    window.location.href = `mailto:hei@solutionsbylangaas.no?subject=${subject}&body=${body}`
-    setSent(true)
+    if (status === 'sending') return
+    setStatus('sending')
+    try {
+      const res = await fetch('/api/send-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, kilde: 'kontaktskjema' }),
+      })
+      if (!res.ok) throw new Error('Feil ved sending')
+      setStatus('sent')
+      setForm({ navn: '', epost: '', telefon: '', melding: '' })
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: "#171516", color: "#fff", fontFamily: "'Outfit', sans-serif" }}>
+    <div style={{ minHeight: "100vh", background: "transparent", color: "#fff", fontFamily: "'Outfit', sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #171516; }
         .gradient-text { background: linear-gradient(135deg, #E879F9 0%, #F0ABFC 30%, #C084FC 60%, #A855F7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .nav-link { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.78rem; font-family: 'Outfit', sans-serif; transition: color 0.3s; font-weight: 400; letter-spacing: 0.02em; }
         .nav-link:hover { color: #E879F9; }
@@ -35,27 +45,15 @@ export default function Kontakt() {
         }
       `}</style>
 
-      <nav className="sub-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "14px 36px", display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(20,18,19,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "1.5rem", letterSpacing: "0.08em" }}>
-            <span className="gradient-text">SBL</span>
-          </div>
-        </Link>
-        <div className="sub-nav-right" style={{ display: "flex", alignItems: "center", gap: "36px" }}>
-          <Link to="/tjenester" className="nav-link sub-nav-links">Tjenester</Link>
-          <Link to="/prosjekter" className="nav-link sub-nav-links">Prosjekter</Link>
-          <Link to="/priser" className="nav-link sub-nav-links">Priser</Link>
-          <Link to="/kontakt" className="cta-btn" style={{ padding: "8px 20px", fontSize: "0.75rem", textDecoration: "none" }}>Kontakt meg</Link>
-        </div>
-      </nav>
+      <SiteNav />
 
       <section className="sub-hero" style={{ padding: "140px 48px 80px", maxWidth: "1200px", margin: "0 auto" }}>
         <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#E879F9", letterSpacing: "0.2em", textTransform: "uppercase" }}>KONTAKT</span>
         <h1 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 4.5vw, 3.5rem)", marginTop: "10px", lineHeight: 1.05 }}>
-          La oss snakke<span style={{ color: "#E879F9" }}>.</span>
+          Fortell meg om ideen<span style={{ color: "#E879F9" }}>.</span>
         </h1>
         <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.95rem", maxWidth: "500px", lineHeight: 1.7, marginTop: "20px" }}>
-          Klar for en ny nettside? Send meg en melding, så tar jeg kontakt innen 24 timer.
+          Har du en idé eller et problem du ikke helt vet hvordan du skal løse digitalt? Det er helt greit. Send meg noen linjer, så tar jeg kontakt.
         </p>
       </section>
 
@@ -106,7 +104,7 @@ export default function Kontakt() {
               <label style={{ display: "block", fontSize: "0.7rem", color: "rgba(255,255,255,0.4)", fontFamily: "'JetBrains Mono', monospace", marginBottom: "6px", letterSpacing: "0.05em" }}>Melding</label>
               <textarea
                 required rows={5} value={form.melding} onChange={e => setForm({ ...form, melding: e.target.value })}
-                placeholder="Fortell meg litt om prosjektet ditt..."
+                placeholder="Hva er tungvint i dag, eller hva vil du ha til å fungere?"
                 style={{
                   width: "100%", padding: "12px 16px", borderRadius: "10px", border: "1px solid rgba(255,255,255,0.08)",
                   background: "rgba(255,255,255,0.04)", color: "#fff", fontSize: "0.85rem", fontFamily: "'Outfit', sans-serif", outline: "none",
@@ -116,9 +114,17 @@ export default function Kontakt() {
                 onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
               />
             </div>
-            <button type="submit" className="cta-btn" style={{ alignSelf: "flex-start", marginTop: "8px" }}>
-              {sent ? "✓ Åpnet e-postklient" : "Send melding →"}
+            <button type="submit" className="cta-btn" disabled={status === 'sending'} style={{ alignSelf: "flex-start", marginTop: "8px", opacity: status === 'sending' ? 0.6 : 1 }}>
+              {status === 'sending' ? 'Sender...' : status === 'sent' ? '✓ Sendt' : 'Send melding →'}
             </button>
+            {status === 'sent' && (
+              <p role="status" style={{ fontSize: "0.8rem", color: "#34D399" }}>Takk! Jeg tar kontakt.</p>
+            )}
+            {status === 'error' && (
+              <p role="alert" style={{ fontSize: "0.8rem", color: "#F87171" }}>
+                Noe gikk galt. Prøv igjen, eller send e-post til hei@solutionsbylangaas.no.
+              </p>
+            )}
           </form>
 
           {/* Kontaktinfo */}
@@ -132,15 +138,15 @@ export default function Kontakt() {
             </div>
 
             <div style={{ padding: "28px", borderRadius: "14px", border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.015)" }}>
-              <div style={{ fontSize: "1.5rem", marginBottom: "12px" }}>📍</div>
-              <div style={{ fontSize: "0.6rem", color: "#E879F9", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>Lokasjon</div>
-              <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem" }}>Mysen, Indre Østfold</span>
+              <div style={{ fontSize: "1.5rem", marginBottom: "12px" }}>💬</div>
+              <div style={{ fontSize: "0.6rem", color: "#E879F9", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>Direkte</div>
+              <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem" }}>Du snakker med personen som bygger løsningen</span>
             </div>
 
             <div style={{ padding: "28px", borderRadius: "14px", border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.015)" }}>
-              <div style={{ fontSize: "1.5rem", marginBottom: "12px" }}>⚡</div>
-              <div style={{ fontSize: "0.6rem", color: "#E879F9", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>Responstid</div>
-              <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem" }}>Svar innen 24 timer</span>
+              <div style={{ fontSize: "1.5rem", marginBottom: "12px" }}>👤</div>
+              <div style={{ fontSize: "0.6rem", color: "#E879F9", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>Hvem svarer</div>
+              <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem" }}>Martin Langaas, Solutions by Langaas</span>
             </div>
           </div>
         </div>
