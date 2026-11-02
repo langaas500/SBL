@@ -10,6 +10,14 @@
 //   visual      – "reports" bruker innebygd illustrasjon når du ikke har bilde (valgfritt)
 export const projects = [
   {
+    title: "Servicerapport",
+    category: "Digitalt system",
+    description:
+      "Jeg ble lei av tungvinte Excel-skjemaer på arbeidsplassen og bygde min egen digitale løsning. Den fungerte så godt at lederen min også begynte å bruke den, og jeg bygde den videre med administrasjon og godkjenning av rapporter. Appen finnes på norsk og polsk.",
+    tags: ["Rapportering", "Administrasjon", "Godkjenning"],
+    image: "/projects/servicerapport.webp",
+  },
+  {
     title: "Pelican Beach Roleplay",
     category: "Nettside",
     description:
@@ -17,13 +25,5 @@ export const projects = [
     tags: ["Community", "Guider", "Mobiltilpasset"],
     image: "/projects/pelican-beach.webp",
     url: "https://pelicanbeachrp.com",
-  },
-  {
-    title: "Digitalt rapportsystem",
-    category: "Digitalt system",
-    description:
-      "Jeg ble lei av tungvinte Excel-skjemaer på arbeidsplassen og bygde min egen digitale løsning. Den fungerte så godt at lederen min også begynte å bruke den, og jeg bygde den videre med administrasjon og godkjenning av rapporter.",
-    tags: ["Rapportering", "Administrasjon", "Godkjenning"],
-    visual: "reports",
   },
 ];
