@@ -5,7 +5,8 @@
 //   category    – f.eks. "Nettside", "App", "Digitalt system"
 //   description – 1–3 setninger: hvilket problem løste du, og hvordan?
 //   tags        – korte stikkord (valgfritt)
-//   image       – bilde i public/projects/, f.eks. "/projects/navn.png" (valgfritt)
+//   image       – ett bilde i public/projects/, f.eks. "/projects/navn.webp" (valgfritt)
+//   images      – flere bilder du kan sveipe mellom: [{ src, alt }, …] (valgfritt, 1200×1200 passer best)
 //   url         – lenke til live-løsning (valgfritt)
 //   visual      – "reports" bruker innebygd illustrasjon når du ikke har bilde (valgfritt)
 export const projects = [
@@ -23,7 +24,12 @@ export const projects = [
     description:
       "Nettside for et roleplay-fellesskap. Den samler guider til jobber, biler og bolig, og leder nye spillere videre til Discord. Mobiltilpasset fra start.",
     tags: ["Community", "Guider", "Mobiltilpasset"],
-    image: "/projects/pelican-beach.webp",
+    images: [
+      { src: "/projects/pelican-1-logo.webp", alt: "Forsiden til Pelican Beach Roleplay med logo" },
+      { src: "/projects/pelican-2-hjem.webp", alt: "Hjemmesiden med Get started og Join our Discord" },
+      { src: "/projects/pelican-3-bolig.webp", alt: "Oversikt over biler, verksted og bolig på nettbrett" },
+      { src: "/projects/pelican-4-jobber.webp", alt: "Guide til jobben Trucking og transport" },
+    ],
     url: "https://pelicanbeachrp.com",
   },
 ];
