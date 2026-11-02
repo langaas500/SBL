@@ -120,7 +120,7 @@ export default async function handler(req, res) {
     const subjectCo = (bedrift || bransje || "Bedrift ikke oppgitt").replace(/[\r\n]+/g, " ");
 
     const { data, error } = await resend.emails.send({
-      from: "Solutions by Langås <ai@solutionsbylangaas.no>",
+      from: "Solutions by Langaas <ai@solutionsbylangaas.no>",
       to: ["lead@solutionsbylangaas.com"],
       // Svar går rett til kunden når e-post er oppgitt og ser gyldig ut
       ...(/^[^\s@<>,;]+@[^\s@<>,;]+\.[^\s@<>,;]+$/.test(epost) ? { replyTo: epost } : {}),

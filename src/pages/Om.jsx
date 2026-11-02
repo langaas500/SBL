@@ -23,7 +23,7 @@ export default function Om() {
         <div className="eyebrow">Om Martin</div>
         <h1 className="page-title">Jeg vet hvordan ting <span className="grad">fungerer i praksis.</span></h1>
         <p className="page-lead">
-          Jeg er Martin Langås. Jeg har mange års erfaring fra teknisk arbeid og service, og kommer ikke fra en rent teoretisk bakgrunn. Jeg er en praktisk problemløser.
+          Jeg er Martin Langaas. Jeg har mange års erfaring fra teknisk arbeid og service, og kommer ikke fra en rent teoretisk bakgrunn. Jeg er en praktisk problemløser.
         </p>
 
         <div className="section-label">Historien som sier mest</div>
@@ -46,7 +46,7 @@ export default function Om() {
 
         <div className="section-label">Direkte kontakt</div>
         <p className="page-lead" style={{ marginTop: 0 }}>
-          Solutions by Langås er et lite firma. Du forholder deg direkte til personen som utvikler løsningen.
+          Solutions by Langaas er et lite firma. Du forholder deg direkte til personen som utvikler løsningen.
         </p>
 
         <div className="cta-row">

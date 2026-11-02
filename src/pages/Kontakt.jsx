@@ -146,7 +146,7 @@ export default function Kontakt() {
             <div style={{ padding: "28px", borderRadius: "14px", border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.015)" }}>
               <div style={{ fontSize: "1.5rem", marginBottom: "12px" }}>👤</div>
               <div style={{ fontSize: "0.6rem", color: "#E879F9", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>Hvem svarer</div>
-              <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem" }}>Martin Langås, Solutions by Langås</span>
+              <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem" }}>Martin Langaas, Solutions by Langaas</span>
             </div>
           </div>
         </div>
@@ -154,7 +154,7 @@ export default function Kontakt() {
 
       <footer className="sub-footer" style={{ borderTop: "1px solid rgba(255,255,255,0.04)", padding: "36px 48px", maxWidth: "1200px", margin: "0 auto", textAlign: "center" }}>
         <p style={{ fontSize: "0.65rem", color: "rgba(255,255,255,0.15)", fontFamily: "'JetBrains Mono', monospace" }}>
-          © 2026 Solutions by Langås. Org nr 936 977 774.
+          © 2026 Solutions by Langaas. Org nr 936 977 774.
         </p>
       </footer>
     </div>

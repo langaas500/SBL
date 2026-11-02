@@ -146,7 +146,7 @@ export default function Home() {
             <span className="grad">Jeg løser det digitalt.</span>
           </h1>
           <p className="home-sub">
-            Jeg er Martin Langås. Med bakgrunn fra teknisk arbeid og service vet jeg hvordan ting faktisk fungerer ute i bedrifter. <b>Du snakker direkte med den som bygger løsningen.</b>
+            Jeg er Martin Langaas. Med bakgrunn fra teknisk arbeid og service vet jeg hvordan ting faktisk fungerer ute i bedrifter. <b>Du snakker direkte med den som bygger løsningen.</b>
           </p>
           <div className="home-pills">
             <Link to="/kontakt" className="home-pill primary"><i>01</i> Snakk med Martin</Link>

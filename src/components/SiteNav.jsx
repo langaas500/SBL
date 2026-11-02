@@ -81,7 +81,7 @@ export default function SiteNav() {
         </ul>
         <div className="sbl-menu-foot">
           <a href="mailto:hei@solutionsbylangaas.no" tabIndex={open ? 0 : -1}>hei@solutionsbylangaas.no</a>
-          <span>Solutions by Langås</span>
+          <span>Solutions by Langaas</span>
         </div>
       </nav>
     </>
