@@ -61,7 +61,7 @@ export default function Priser() {
               </div>
             ))}
             <div style={{ flex: 1 }} />
-            <button className="cta-outline" style={{ width: "100%", marginTop: "28px", borderColor: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)" }}>Velg Starter</button>
+            <Link to="/kontakt" className="cta-outline" style={{ width: "100%", marginTop: "28px", borderColor: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)", textDecoration: "none", textAlign: "center", display: "block" }}>Velg Starter</Link>
           </div>
           {/* Pro */}
           <div style={{
@@ -85,7 +85,7 @@ export default function Priser() {
               </div>
             ))}
             <div style={{ flex: 1 }} />
-            <button className="cta-btn" style={{ width: "100%", marginTop: "28px" }}>Velg Pro</button>
+            <Link to="/kontakt" className="cta-btn" style={{ width: "100%", marginTop: "28px", textDecoration: "none", textAlign: "center", display: "block" }}>Velg Pro</Link>
           </div>
           {/* Enterprise */}
           <div style={{ borderRadius: "16px", border: "1px solid rgba(255,255,255,0.06)", padding: "36px 28px", display: "flex", flexDirection: "column" }}>

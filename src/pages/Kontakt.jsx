@@ -3,14 +3,24 @@ import { Link } from 'react-router-dom'
 
 export default function Kontakt() {
   const [form, setForm] = useState({ navn: '', epost: '', telefon: '', melding: '' })
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState('idle') // idle | sending | sent | error
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    const subject = encodeURIComponent(`Henvendelse fra ${form.navn}`)
-    const body = encodeURIComponent(`Navn: ${form.navn}\nTelefon: ${form.telefon}\n\n${form.melding}`)
-    window.location.href = `mailto:hei@solutionsbylangaas.no?subject=${subject}&body=${body}`
-    setSent(true)
+    if (status === 'sending') return
+    setStatus('sending')
+    try {
+      const res = await fetch('/api/send-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, kilde: 'kontaktskjema' }),
+      })
+      if (!res.ok) throw new Error('Feil ved sending')
+      setStatus('sent')
+      setForm({ navn: '', epost: '', telefon: '', melding: '' })
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -116,9 +126,17 @@ export default function Kontakt() {
                 onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
               />
             </div>
-            <button type="submit" className="cta-btn" style={{ alignSelf: "flex-start", marginTop: "8px" }}>
-              {sent ? "✓ Åpnet e-postklient" : "Send melding →"}
+            <button type="submit" className="cta-btn" disabled={status === 'sending'} style={{ alignSelf: "flex-start", marginTop: "8px", opacity: status === 'sending' ? 0.6 : 1 }}>
+              {status === 'sending' ? 'Sender...' : status === 'sent' ? '✓ Sendt' : 'Send melding →'}
             </button>
+            {status === 'sent' && (
+              <p role="status" style={{ fontSize: "0.8rem", color: "#34D399" }}>Takk! Jeg tar kontakt innen 24 timer.</p>
+            )}
+            {status === 'error' && (
+              <p role="alert" style={{ fontSize: "0.8rem", color: "#F87171" }}>
+                Noe gikk galt. Prøv igjen, eller send e-post til hei@solutionsbylangaas.no.
+              </p>
+            )}
           </form>
 
           {/* Kontaktinfo */}

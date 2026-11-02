@@ -1,6 +1,11 @@
 // Vercel Serverless Function – Claude API proxy
 // Krever: ANTHROPIC_API_KEY i Vercel Environment Variables
 
+import { getIp, rateLimit, isSameOrigin, str } from "../_lib/security.js";
+
+const MAX_MESSAGES = 20;
+const MAX_CHARS = 1000;
+
 const SYSTEM_PROMPT = `Du er salgsassistenten til Solutions by Langaas – et webdesign-byrå drevet av Maxi i Mysen, Indre Østfold. Din jobb er å hjelpe besøkende forstå hva vi tilbyr, svare på spørsmål, og få dem til å ta kontakt med Maxi.
 
 ## Hvem du er
@@ -95,8 +100,29 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
+  if (!isSameOrigin(req)) {
+    return res.status(403).json({ error: "Forbudt" });
+  }
+
+  // Maks 20 meldinger per IP per 10 minutter
+  if (!rateLimit(`chat:${getIp(req)}`, 20, 10 * 60 * 1000)) {
+    return res.status(429).json({ error: "For mange meldinger. Prøv igjen senere." });
+  }
+
   try {
-    const { messages } = req.body;
+    // Aldri stol på klienten: bare roller, tekst og lengde vi selv tillater
+    const raw = Array.isArray(req.body?.messages) ? req.body.messages : [];
+    const messages = raw
+      .slice(-MAX_MESSAGES)
+      .map((m) => ({
+        role: m?.role === "assistant" ? "assistant" : m?.role === "user" ? "user" : null,
+        content: str(m?.content, MAX_CHARS),
+      }))
+      .filter((m) => m.role && m.content);
+
+    if (messages.length === 0 || messages[messages.length - 1].role !== "user") {
+      return res.status(400).json({ error: "Ugyldig forespørsel" });
+    }
 
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
