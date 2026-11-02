@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import SiteNav from '../components/SiteNav'
 
 export default function Tjenester() {
   const services = [
@@ -11,11 +12,10 @@ export default function Tjenester() {
   ]
 
   return (
-    <div style={{ minHeight: "100vh", background: "#171516", color: "#fff", fontFamily: "'Outfit', sans-serif" }}>
+    <div style={{ minHeight: "100vh", background: "transparent", color: "#fff", fontFamily: "'Outfit', sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #171516; }
         .gradient-text { background: linear-gradient(135deg, #E879F9 0%, #F0ABFC 30%, #C084FC 60%, #A855F7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .nav-link { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.78rem; font-family: 'Outfit', sans-serif; transition: color 0.3s; font-weight: 400; letter-spacing: 0.02em; }
         .nav-link:hover { color: #E879F9; }
@@ -32,19 +32,7 @@ export default function Tjenester() {
         }
       `}</style>
 
-      <nav className="sub-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "14px 36px", display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(20,18,19,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <div style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "1.5rem", letterSpacing: "0.08em" }}>
-            <span className="gradient-text">SBL</span>
-          </div>
-        </Link>
-        <div className="sub-nav-right" style={{ display: "flex", alignItems: "center", gap: "36px" }}>
-          <Link to="/tjenester" className="nav-link sub-nav-links" style={{ color: "#E879F9" }}>Tjenester</Link>
-          <Link to="/prosjekter" className="nav-link sub-nav-links">Prosjekter</Link>
-          <Link to="/priser" className="nav-link sub-nav-links">Priser</Link>
-          <Link to="/kontakt" className="cta-btn" style={{ padding: "8px 20px", fontSize: "0.75rem", textDecoration: "none" }}>Kontakt meg</Link>
-        </div>
-      </nav>
+      <SiteNav />
 
       <section className="sub-hero" style={{ padding: "140px 48px 80px", maxWidth: "1200px", margin: "0 auto" }}>
         <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#E879F9", letterSpacing: "0.2em", textTransform: "uppercase" }}>TJENESTER</span>
