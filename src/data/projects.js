@@ -10,6 +10,15 @@
 //   visual      – "reports" bruker innebygd illustrasjon når du ikke har bilde (valgfritt)
 export const projects = [
   {
+    title: "Pelican Beach Roleplay",
+    category: "Nettside",
+    description:
+      "Nettside for et roleplay-fellesskap. Den samler guider til jobber, biler og bolig, og leder nye spillere videre til Discord. Mobiltilpasset fra start.",
+    tags: ["Community", "Guider", "Mobiltilpasset"],
+    image: "/projects/pelican-beach.webp",
+    url: "https://pelicanbeachrp.com",
+  },
+  {
     title: "Digitalt rapportsystem",
     category: "Digitalt system",
     description:
