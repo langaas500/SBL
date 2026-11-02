@@ -17,7 +17,7 @@ export const projects = [
     category: "Digitalt system",
     description:
       "Jeg ble lei av tungvinte Excel-skjemaer og bygde en app teknikerne fyller ut på mobilen, rett ute hos kunden. De registrerer avvik med bilder, og appen lager en ferdig PDF-rapport og en utfylt Excel-fil som sendes til kontoret. Admin går gjennom, justerer og behandler rapportene. Appen virker uten nett og finnes på norsk og polsk.",
-    note: "Den ferdige appen for kunden vises ikke live på grunn av sensitiv informasjon. Demoen bruker fiktive data.",
+    note: "Den ferdige appen for kunden vises ikke live på grunn av sensitiv informasjon. Demoen bruker fiktive data, og du kan logge inn med hva som helst.",
     tags: ["Mobilapp (PWA)", "PDF og Excel", "Admin", "Norsk og polsk", "Offline"],
     images: [
       { src: "/projects/servicerapport.webp", alt: "Innloggingen i Servicerapport-appen med valg mellom norsk og polsk" },
