@@ -36,4 +36,18 @@ export const projects = [
     ],
     url: "https://pelicanbeachrp.com",
   },
+  {
+    title: "Refleksjonsrommet",
+    category: "Nettside",
+    description:
+      "Nettside for podcasten Refleksjonsrommet. Forsiden presenterer podcasten, og en egen episodeside samler alle episodene med avspilling via Spotify. Den har også sider for gjester, om podcasten og sponsorer, og fungerer på mobil, nettbrett og PC.",
+    tags: ["Podcast", "Episodeoversikt", "Spotify", "Responsivt"],
+    images: [
+      { src: "/projects/refleksjonsrommet-1-kombinert.webp", alt: "Refleksjonsrommet på nettbrett og mobil" },
+      { src: "/projects/refleksjonsrommet-2-nettbrett.webp", alt: "Forsiden til Refleksjonsrommet på nettbrett med Spotify-spiller" },
+      { src: "/projects/refleksjonsrommet-3-mobil-forside.webp", alt: "Forsiden til Refleksjonsrommet på mobil" },
+      { src: "/projects/refleksjonsrommet-4-mobil-episoder.webp", alt: "Episodeoversikten på mobil med siste episode" },
+    ],
+    url: "https://www.refleksjonsrommet.com",
+  },
 ];
