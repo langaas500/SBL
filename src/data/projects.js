@@ -14,9 +14,13 @@ export const projects = [
     title: "Servicerapport",
     category: "Digitalt system",
     description:
-      "Jeg ble lei av tungvinte Excel-skjemaer på arbeidsplassen og bygde min egen digitale løsning. Den fungerte så godt at lederen min også begynte å bruke den, og jeg bygde den videre med administrasjon og godkjenning av rapporter. Appen finnes på norsk og polsk.",
-    tags: ["Rapportering", "Administrasjon", "Godkjenning"],
-    image: "/projects/servicerapport.webp",
+      "Jeg ble lei av tungvinte Excel-skjemaer og bygde en app teknikerne fyller ut på mobilen, rett ute hos kunden. De registrerer avvik med bilder, og appen lager en ferdig PDF-rapport og en utfylt Excel-fil som sendes til kontoret. Admin går gjennom, justerer og behandler rapportene. Appen virker uten nett og finnes på norsk og polsk.",
+    tags: ["Mobilapp (PWA)", "PDF og Excel", "Admin", "Norsk og polsk", "Offline"],
+    images: [
+      { src: "/projects/servicerapport.webp", alt: "Innloggingen i Servicerapport-appen med valg mellom norsk og polsk" },
+      { src: "/projects/servicerapport-2-pdf-side1.webp", alt: "Side 1 av en ferdig PDF-rapport med kundeinfo, oppsummering og avviksliste (eksempeldata)" },
+      { src: "/projects/servicerapport-3-pdf-side2.webp", alt: "Side 2 av PDF-rapporten med bilder per avvik og tilstandsvurdering (eksempeldata)" },
+    ],
   },
   {
     title: "Pelican Beach Roleplay",

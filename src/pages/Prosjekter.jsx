@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import SiteNav from '../components/SiteNav'
 import SiteFooter from '../components/SiteFooter'
@@ -19,7 +19,17 @@ const visuals = { reports: ReportsMock }
 function Gallery({ title, images }) {
   const ref = useRef(null)
   const [index, setIndex] = useState(0)
+  const [zoom, setZoom] = useState(null)
+  const dialogRef = useRef(null)
   const count = images.length
+
+  // Åpne/lukke bildet i stor visning med <dialog> (Esc og klikk utenfor lukker)
+  useEffect(() => {
+    const d = dialogRef.current
+    if (!d) return
+    if (zoom && !d.open) d.showModal()
+    if (!zoom && d.open) d.close()
+  }, [zoom])
 
   const goTo = (i) => {
     const el = ref.current
@@ -45,9 +55,17 @@ function Gallery({ title, images }) {
           <img
             key={img.src} src={img.src} alt={img.alt || `Bilde ${i + 1} fra ${title}`}
             loading={i === 0 ? 'eager' : 'lazy'} draggable={false}
+            onClick={() => setZoom(img)}
           />
         ))}
       </div>
+      <dialog
+        ref={dialogRef} className="lightbox" aria-label={zoom?.alt || 'Stort bilde'}
+        onClose={() => setZoom(null)} onClick={(e) => { if (e.target === e.currentTarget) setZoom(null) }}
+      >
+        {zoom && <img src={zoom.src} alt={zoom.alt} />}
+        <button type="button" className="lightbox-close" aria-label="Lukk" onClick={() => setZoom(null)}>×</button>
+      </dialog>
       {count > 1 && (
         <>
           <button type="button" className="gallery-arrow prev" aria-label="Forrige bilde" onClick={() => goTo(index - 1)} disabled={index === 0}>‹</button>
