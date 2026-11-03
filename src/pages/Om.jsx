@@ -29,17 +29,28 @@ export default function Om() {
             </h1>
           </Reveal>
 
-          <Reveal className="om-wrap om-intro" delay={120}>
-            <p className="om-name">Jeg heter Martin Langaas.</p>
-            <p>
-              I over ti år har jeg jobbet i tekniske fag, blant annet syv år som bas. Men ved siden av jobben har jeg hatt
-              en annen stor lidenskap: IT og teknologi.
-            </p>
-            <p>
-              I 17 år har jeg brukt fritiden min på det som interesserer meg aller mest. Jeg elsker å forstå hvordan
-              teknologi fungerer, utforske mulighetene og finne nye måter å løse problemer på.
-            </p>
-          </Reveal>
+          <div className="om-wrap om-hero-grid">
+            <Reveal className="om-intro" delay={120}>
+              <p className="om-name">Jeg heter Martin Langaas.</p>
+              <p>
+                I over ti år har jeg jobbet i tekniske fag, blant annet syv år som bas. Men ved siden av jobben har jeg
+                hatt en annen stor lidenskap: IT og teknologi.
+              </p>
+              <p>
+                I 17 år har jeg brukt fritiden min på det som interesserer meg aller mest. Jeg elsker å forstå hvordan
+                teknologi fungerer, utforske mulighetene og finne nye måter å løse problemer på.
+              </p>
+            </Reveal>
+
+            <Reveal className="om-portrait" delay={220}>
+              <img
+                src="/om/martin-langaas.webp"
+                alt="Portrett av Martin Langaas"
+                width="1000" height="1250"
+                fetchPriority="high"
+              />
+            </Reveal>
+          </div>
 
           <Reveal className="om-wrap" delay={200}>
             <dl className="om-facts">
