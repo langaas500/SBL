@@ -9,10 +9,10 @@ const LINKS = [
   { to: "/kontakt", label: "Kontakt" },
 ];
 
-// Bakgrunn med glød og prikkrutenett, felles for alle sider
-export function Backdrop({ calm = false }) {
+// Rolig bakgrunn med dempet glød og prikkrutenett, felles for alle sider
+export function Backdrop() {
   return (
-    <div className={`sbl-backdrop${calm ? " is-calm" : ""}`} aria-hidden="true">
+    <div className="sbl-backdrop" aria-hidden="true">
       <div className="sbl-glow sbl-glow-a" />
       <div className="sbl-glow sbl-glow-b" />
       <div className="sbl-glow sbl-glow-c" />
@@ -21,15 +21,16 @@ export function Backdrop({ calm = false }) {
   );
 }
 
-// Topplinje med logo og hamburger + fullskjermsmeny
-export default function SiteNav({ calm = false }) {
+// PC og nettbrett: fast sidemeny til venstre. Mobil: topplinje med hamburger og fullskjermsmeny.
+export default function SiteNav() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
+  const isActive = (to) => pathname === to || (to !== "/" && pathname.startsWith(to + "/"));
 
-  // Lukk menyen når siden byttes
+  // Lukk mobilmenyen når siden byttes
   useEffect(() => { setOpen(false); }, [pathname]);
 
-  // Esc lukker, og siden bak kan ikke scrolle mens menyen er åpen
+  // Esc lukker, og siden bak kan ikke scrolle mens mobilmenyen er åpen
   useEffect(() => {
     if (!open) return;
     const onKey = (e) => { if (e.key === "Escape") setOpen(false); };
@@ -44,35 +45,63 @@ export default function SiteNav({ calm = false }) {
 
   return (
     <>
-      <Backdrop calm={calm} />
+      <Backdrop />
+
+      {/* ── PC og nettbrett: sidemeny ── */}
+      <aside className="side">
+        <Link to="/" className="side-logo" aria-label="SBL – til forsiden">
+          SB<span>L</span>
+        </Link>
+        <nav className="side-nav" aria-label="Hovedmeny">
+          <ul>
+            {LINKS.map((l) => (
+              <li key={l.to}>
+                <Link
+                  to={l.to}
+                  className={isActive(l.to) ? "is-active" : ""}
+                  aria-current={isActive(l.to) ? "page" : undefined}
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="side-foot">
+          <a href="mailto:hei@solutionsbylangaas.no">hei@solutionsbylangaas.no</a>
+          <span>Solutions by Langaas</span>
+        </div>
+      </aside>
+      {pathname !== "/kontakt" && (
+        <Link to="/kontakt" className="side-cta">Ta kontakt</Link>
+      )}
+
+      {/* ── Mobil: topplinje og hamburger ── */}
       <header className="sbl-bar">
         <Link to="/" className="sbl-logo" aria-label="SBL – til forsiden">
-          <span className="gradient-text">SBL</span>
+          SB<span>L</span>
         </Link>
-        <div className="sbl-bar-right">
-          <span className="sbl-domain">SOLUTIONSBYLANGAAS.NO</span>
-          <button
-            type="button"
-            className={`sbl-burger${open ? " is-open" : ""}`}
-            aria-label={open ? "Lukk meny" : "Åpne meny"}
-            aria-expanded={open}
-            aria-controls="sbl-menu"
-            onClick={() => setOpen((o) => !o)}
-          >
-            <span /><span /><span />
-          </button>
-        </div>
+        <button
+          type="button"
+          className={`sbl-burger${open ? " is-open" : ""}`}
+          aria-label={open ? "Lukk meny" : "Åpne meny"}
+          aria-expanded={open}
+          aria-controls="sbl-menu"
+          onClick={() => setOpen((o) => !o)}
+        >
+          <span /><span /><span />
+        </button>
       </header>
 
-      <nav id="sbl-menu" className={`sbl-menu${open ? " is-open" : ""}`} aria-label="Hovedmeny" aria-hidden={!open}>
+      <nav id="sbl-menu" className={`sbl-menu${open ? " is-open" : ""}`} aria-label="Mobilmeny" aria-hidden={!open}>
         <ul>
           {LINKS.map((l, i) => (
             <li key={l.to} style={{ "--i": i }}>
               <Link
                 to={l.to}
                 tabIndex={open ? 0 : -1}
-                className={pathname === l.to ? "is-active" : ""}
-                aria-current={pathname === l.to ? "page" : undefined}
+                className={isActive(l.to) ? "is-active" : ""}
+                aria-current={isActive(l.to) ? "page" : undefined}
               >
                 <span className="sbl-menu-num">0{i + 1}</span>
                 <span className="sbl-menu-label">{l.label}</span>

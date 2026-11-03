@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home'
 import Tjenester from './pages/Tjenester'
 import Prosjekter from './pages/Prosjekter'
+import ProsjektDetalj from './pages/ProsjektDetalj'
 import Om from './pages/Om'
 import Kontakt from './pages/Kontakt'
 
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/tjenester" element={<Tjenester />} />
         <Route path="/prosjekter" element={<Prosjekter />} />
+        <Route path="/prosjekter/:slug" element={<ProsjektDetalj />} />
         <Route path="/om" element={<Om />} />
         <Route path="/kontakt" element={<Kontakt />} />
         {/* Gamle sider som er fjernet */}

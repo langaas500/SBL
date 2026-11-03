@@ -25,32 +25,28 @@ export default function Kontakt() {
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: "transparent", color: "#fff", fontFamily: "'Outfit', sans-serif" }}>
+    <div className="kontakt-root" style={{ minHeight: "100vh", background: "transparent", color: "#fff", fontFamily: "'Outfit', sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        .gradient-text { background: linear-gradient(135deg, #E879F9 0%, #F0ABFC 30%, #C084FC 60%, #A855F7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .nav-link { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.78rem; font-family: 'Outfit', sans-serif; transition: color 0.3s; font-weight: 400; letter-spacing: 0.02em; }
-        .nav-link:hover { color: #E879F9; }
-        .cta-btn { padding: 12px 28px; border-radius: 50px; border: none; background: linear-gradient(135deg, #E879F9, #A855F7); color: #fff; font-weight: 600; font-size: 0.82rem; font-family: 'Outfit', sans-serif; cursor: pointer; transition: all 0.3s ease; }
-        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,121,249,0.3); }
-        @media (max-width: 768px) {
-          .sub-nav { padding: 12px 20px !important; }
-          .sub-nav-links { display: none !important; }
-          .sub-nav-right { gap: 0 !important; }
-          .sub-hero { padding: 100px 20px 60px !important; }
-          .sub-content { padding: 0 20px 80px !important; }
+                        .cta-btn { padding: 12px 28px; border-radius: 50px; border: none; background: #6d5dfc; color: #fff; font-weight: 600; font-size: 0.82rem; font-family: 'Outfit', sans-serif; cursor: pointer; transition: all 0.3s ease; }
+        .cta-btn:hover { background: #7b6dff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(109,93,252,0.28); }
+        @media (max-width: 1040px) {
           .kontakt-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+        }
+        @media (max-width: 700px) {
+          .sub-hero { padding: 100px 20px 48px !important; }
+          .sub-content { padding: 0 20px 80px !important; }
           .sub-footer { padding: 24px 20px !important; }
         }
       `}</style>
 
       <SiteNav />
 
-      <section className="sub-hero" style={{ padding: "140px 48px 80px", maxWidth: "1200px", margin: "0 auto" }}>
-        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#E879F9", letterSpacing: "0.2em", textTransform: "uppercase" }}>KONTAKT</span>
+      <section className="sub-hero" style={{ padding: "112px 48px 56px", maxWidth: "1200px", margin: "0 auto" }}>
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#A9B4FF", letterSpacing: "0.2em", textTransform: "uppercase" }}>KONTAKT</span>
         <h1 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 4.5vw, 3.5rem)", marginTop: "10px", lineHeight: 1.05 }}>
-          Fortell meg om ideen<span style={{ color: "#E879F9" }}>.</span>
+          Fortell meg om ideen<span style={{ color: "#A9B4FF" }}>.</span>
         </h1>
         <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.95rem", maxWidth: "500px", lineHeight: 1.7, marginTop: "20px" }}>
           Har du en idé eller et problem du ikke helt vet hvordan du skal løse digitalt? Det er helt greit. Send meg noen linjer, så tar jeg kontakt.
@@ -70,7 +66,7 @@ export default function Kontakt() {
                   background: "rgba(255,255,255,0.04)", color: "#fff", fontSize: "0.85rem", fontFamily: "'Outfit', sans-serif", outline: "none",
                   transition: "border-color 0.3s",
                 }}
-                onFocus={e => e.target.style.borderColor = "rgba(232,121,249,0.3)"}
+                onFocus={e => e.target.style.borderColor = "rgba(143,156,255,0.3)"}
                 onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
               />
             </div>
@@ -83,7 +79,7 @@ export default function Kontakt() {
                   background: "rgba(255,255,255,0.04)", color: "#fff", fontSize: "0.85rem", fontFamily: "'Outfit', sans-serif", outline: "none",
                   transition: "border-color 0.3s",
                 }}
-                onFocus={e => e.target.style.borderColor = "rgba(232,121,249,0.3)"}
+                onFocus={e => e.target.style.borderColor = "rgba(143,156,255,0.3)"}
                 onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
               />
             </div>
@@ -96,7 +92,7 @@ export default function Kontakt() {
                   background: "rgba(255,255,255,0.04)", color: "#fff", fontSize: "0.85rem", fontFamily: "'Outfit', sans-serif", outline: "none",
                   transition: "border-color 0.3s",
                 }}
-                onFocus={e => e.target.style.borderColor = "rgba(232,121,249,0.3)"}
+                onFocus={e => e.target.style.borderColor = "rgba(143,156,255,0.3)"}
                 onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
               />
             </div>
@@ -110,7 +106,7 @@ export default function Kontakt() {
                   background: "rgba(255,255,255,0.04)", color: "#fff", fontSize: "0.85rem", fontFamily: "'Outfit', sans-serif", outline: "none",
                   resize: "vertical", transition: "border-color 0.3s",
                 }}
-                onFocus={e => e.target.style.borderColor = "rgba(232,121,249,0.3)"}
+                onFocus={e => e.target.style.borderColor = "rgba(143,156,255,0.3)"}
                 onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
               />
             </div>
@@ -130,22 +126,19 @@ export default function Kontakt() {
           {/* Kontaktinfo */}
           <div style={{ display: "flex", flexDirection: "column", gap: "32px", paddingTop: "8px" }}>
             <div style={{ padding: "28px", borderRadius: "14px", border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.015)" }}>
-              <div style={{ fontSize: "1.5rem", marginBottom: "12px" }}>📧</div>
-              <div style={{ fontSize: "0.6rem", color: "#E879F9", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>E-post</div>
+              <div style={{ fontSize: "0.6rem", color: "#A9B4FF", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>E-post</div>
               <a href="mailto:hei@solutionsbylangaas.no" style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem", textDecoration: "none" }}>
                 hei@solutionsbylangaas.no
               </a>
             </div>
 
             <div style={{ padding: "28px", borderRadius: "14px", border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.015)" }}>
-              <div style={{ fontSize: "1.5rem", marginBottom: "12px" }}>💬</div>
-              <div style={{ fontSize: "0.6rem", color: "#E879F9", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>Direkte</div>
+              <div style={{ fontSize: "0.6rem", color: "#A9B4FF", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>Direkte</div>
               <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem" }}>Du snakker med personen som bygger løsningen</span>
             </div>
 
             <div style={{ padding: "28px", borderRadius: "14px", border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.015)" }}>
-              <div style={{ fontSize: "1.5rem", marginBottom: "12px" }}>👤</div>
-              <div style={{ fontSize: "0.6rem", color: "#E879F9", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>Hvem svarer</div>
+              <div style={{ fontSize: "0.6rem", color: "#A9B4FF", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>Hvem svarer</div>
               <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem" }}>Martin Langaas, Solutions by Langaas</span>
             </div>
           </div>

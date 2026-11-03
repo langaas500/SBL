@@ -112,13 +112,13 @@ export default function AIChatWidget() {
         onClick={() => setIsOpen(true)}
         style={{
           position: "fixed", bottom: "20px", right: "20px", width: "52px", height: "52px",
-          borderRadius: "50%", border: "none", background: "linear-gradient(135deg, #E879F9, #A855F7)",
+          borderRadius: "50%", border: "none", background: "#6d5dfc",
           color: "#fff", fontSize: "1.3rem", cursor: "pointer",
-          boxShadow: "0 4px 20px rgba(232,121,249,0.3)", zIndex: 999,
+          boxShadow: "0 4px 20px rgba(109,93,252,0.3)", zIndex: 999,
           transition: "all 0.3s ease", display: "flex", alignItems: "center", justifyContent: "center",
         }}
-        onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.08)"; e.currentTarget.style.boxShadow = "0 8px 28px rgba(232,121,249,0.4)"; }}
-        onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(232,121,249,0.3)"; }}
+        onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.08)"; e.currentTarget.style.boxShadow = "0 8px 28px rgba(109,93,252,0.4)"; }}
+        onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(109,93,252,0.3)"; }}
       >
         💬
       </button>
@@ -156,7 +156,7 @@ export default function AIChatWidget() {
               alignSelf: msg.role === "user" ? "flex-end" : "flex-start", maxWidth: "82%",
               padding: "10px 14px",
               borderRadius: msg.role === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px",
-              background: msg.role === "user" ? "linear-gradient(135deg, #E879F9, #A855F7)" : "rgba(255,255,255,0.06)",
+              background: msg.role === "user" ? "#6d5dfc" : "rgba(255,255,255,0.06)",
               color: msg.role === "user" ? "#fff" : "#D4CBC2",
               fontSize: "0.82rem", fontFamily: "'Outfit', sans-serif", lineHeight: 1.5,
             }}>{msg.text}</div>
@@ -164,7 +164,7 @@ export default function AIChatWidget() {
           {isTyping && (
             <div style={{ alignSelf: "flex-start", padding: "10px 16px", borderRadius: "16px 16px 16px 4px", background: "rgba(255,255,255,0.06)", display: "flex", gap: "4px" }}>
               {[0, 1, 2].map((i) => (
-                <div key={i} style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#E879F9", animation: `typingDot 1.4s ease infinite ${i * 0.2}s` }} />
+                <div key={i} style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#a9b4ff", animation: `typingDot 1.4s ease infinite ${i * 0.2}s` }} />
               ))}
             </div>
           )}
@@ -185,7 +185,7 @@ export default function AIChatWidget() {
           />
           <button onClick={sendMessage} disabled={isTyping} style={{
             padding: "10px 16px", borderRadius: "12px", border: "none",
-            background: isTyping ? "rgba(255,255,255,0.1)" : "linear-gradient(135deg, #E879F9, #A855F7)",
+            background: isTyping ? "rgba(255,255,255,0.1)" : "#6d5dfc",
             color: "#fff", fontWeight: 600, cursor: isTyping ? "not-allowed" : "pointer", fontSize: "0.85rem",
           }}>→</button>
         </div>
@@ -194,9 +194,9 @@ export default function AIChatWidget() {
       {/* Lukke-knapp */}
       <button onClick={() => setIsOpen(false)} style={{
         position: "fixed", bottom: "20px", right: "20px", width: "52px", height: "52px",
-        borderRadius: "50%", border: "none", background: "linear-gradient(135deg, #E879F9, #A855F7)",
+        borderRadius: "50%", border: "none", background: "#6d5dfc",
         color: "#fff", fontSize: "1.5rem", cursor: "pointer",
-        boxShadow: "0 4px 20px rgba(232,121,249,0.3)", zIndex: 999,
+        boxShadow: "0 4px 20px rgba(109,93,252,0.3)", zIndex: 999,
         display: "flex", alignItems: "center", justifyContent: "center",
       }}>×</button>
 

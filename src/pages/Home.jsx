@@ -54,15 +54,15 @@ export default function Home() {
         .home { position: relative; min-height: 100dvh; display: flex; flex-direction: column; overflow-x: hidden; }
         .home-main {
           flex: 1; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: center;
-          gap: clamp(24px, 4vw, 64px); padding: 96px clamp(20px, 4vw, 56px) 24px; width: 100%; max-width: 1400px; margin: 0 auto;
+          gap: clamp(24px, 4vw, 64px); padding: 76px clamp(24px, 4vw, 56px) 24px; width: 100%; max-width: 1400px; margin: 0 auto;
         }
         .home-eyebrow { display: flex; align-items: center; gap: 14px; font-family: var(--mono); font-size: .72rem; letter-spacing: .2em; color: #a89bff; text-transform: uppercase; animation: fadeInUp .6s ease both; }
         .home-eyebrow::before { content: ""; width: 28px; height: 1px; background: #a89bff; }
         .home-title {
           font-weight: 800; letter-spacing: -.04em; line-height: .98; margin: 22px 0 0;
-          font-size: clamp(2.4rem, min(5.8vw, 9vh), 5.2rem); animation: fadeInUp .6s ease .1s both;
+          font-size: clamp(2.4rem, min(4.6vw, 9vh), 5.2rem); animation: fadeInUp .6s ease .1s both;
         }
-        .home-title .grad { background: linear-gradient(95deg, #a78bfa 0%, #f0abfc 40%, #fdba74 75%, #bef264 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+                .home-title .grad { background: linear-gradient(95deg, #c4b5fd 0%, #a5b4fc 50%, #93c5fd 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
         .home-sub { max-width: 500px; color: var(--muted); font-size: clamp(.95rem, 1.5vh + .4rem, 1.12rem); line-height: 1.65; font-weight: 300; margin: clamp(16px, 3vh, 30px) 0; animation: fadeInUp .6s ease .25s both; }
         .home-sub b { color: #fff; font-weight: 500; }
         .home-pills { display: flex; flex-wrap: wrap; gap: 12px; animation: fadeInUp .6s ease .4s both; }
@@ -72,8 +72,9 @@ export default function Home() {
           font-size: .9rem; font-weight: 500; transition: transform .3s, border-color .3s, background .3s;
         }
         .home-pill i { font-style: normal; font-family: var(--mono); font-size: .65rem; color: #a89bff; }
-        .home-pill:hover { transform: translateY(-2px); border-color: rgba(232,121,249,.45); background: rgba(232,121,249,.1); }
-        .home-pill.primary { background: linear-gradient(135deg, #e879f9, #a855f7); border-color: transparent; }
+        .home-pill:hover { transform: translateY(-2px); border-color: rgba(143,156,255,.5); background: rgba(143,156,255,.1); }
+                .home-pill.primary { background: #6d5dfc; border-color: transparent; }
+        .home-pill.primary:hover { background: #7b6dff; }
         .home-pill.primary i { color: rgba(255,255,255,.75); }
 
         /* Scene til høyre */
@@ -115,12 +116,19 @@ export default function Home() {
         .home-foot li + li::before { content: "✦"; color: #7c5cff; margin-right: 14px; }
 
         /* Hele forsiden skal passe på én skjerm uten scrolling */
-        @media (min-width: 901px) and (min-height: 600px) {
+        @media (min-width: 1001px) and (min-height: 600px) {
           .home { height: 100dvh; overflow: hidden; }
         }
 
-        @media (max-width: 900px) {
-          .home-main { grid-template-columns: 1fr; align-content: center; gap: 20px; padding-top: 80px; }
+        @media (max-width: 1100px) { .home-foot li:nth-child(5) { display: none; } }
+        /* Nettbrett og smalere skjermer: én kolonne, alle tre kortene vises */
+        @media (max-width: 1000px) {
+          .home-main { grid-template-columns: 1fr; align-content: center; gap: 28px; padding-top: 64px; }
+          .home-stage { justify-self: start; width: min(100%, 460px); }
+        }
+        /* Mobil: kompakt versjon med ett kort */
+        @media (max-width: 700px) {
+          .home-main { padding-top: 84px; gap: 20px; }
           .home-eyebrow { font-size: .6rem; letter-spacing: .12em; white-space: nowrap; }
           .home-eyebrow::before { width: 16px; }
           .home-title { font-size: clamp(2.2rem, min(10.5vw, 7vh), 3.5rem); margin-top: 14px; }
@@ -132,7 +140,7 @@ export default function Home() {
           .home-pill { padding: 11px 16px; font-size: .85rem; }
           .home-foot { padding: 14px 84px 18px 20px; }
         }
-        @media (max-width: 900px) and (max-height: 700px) { .home-stage { display: none; } }
+        @media (max-width: 700px) and (max-height: 700px) { .home-stage { display: none; } }
       `}</style>
 
       <SiteNav />
