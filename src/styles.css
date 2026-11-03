@@ -76,12 +76,12 @@ a { color: inherit; }
   opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s;
 }
 .sbl-menu.is-open { opacity: 1; visibility: visible; }
-.sbl-menu ul { list-style: none; display: flex; flex-direction: column; gap: clamp(2px, 1.2vh, 12px); }
+.sbl-menu ul { list-style: none; display: flex; flex-direction: column; gap: clamp(2px, 1vh, 10px); }
 .sbl-menu li { opacity: 0; }
 .sbl-menu.is-open li { animation: menuItem .6s cubic-bezier(.2,.7,.2,1) calc(var(--i) * 70ms + 120ms) both; }
-.sbl-menu a { text-decoration: none; display: inline-flex; align-items: baseline; gap: 18px; color: #fff; }
-.sbl-menu-num { font-family: var(--mono); font-size: .75rem; color: rgba(255,255,255,.35); }
-.sbl-menu-label { font-weight: 800; font-size: clamp(2.4rem, 8vh, 5rem); line-height: 1.1; letter-spacing: -.03em; transition: color .3s, transform .3s; }
+.sbl-menu a { text-decoration: none; display: inline-flex; align-items: baseline; gap: 14px; padding: 4px 0; color: #fff; }
+.sbl-menu-num { font-family: var(--mono); font-size: .68rem; color: rgba(255,255,255,.35); min-width: 1.6em; }
+.sbl-menu-label { font-weight: 700; font-size: clamp(1.6rem, min(8.4vw, 5.2vh), 2.5rem); line-height: 1.15; letter-spacing: -.025em; white-space: nowrap; transition: color .3s, transform .3s; }
 .sbl-menu a:hover .sbl-menu-label { color: #b4bcff; transform: translateX(8px); }
 .sbl-menu a.is-active .sbl-menu-label { color: #b4bcff; }
 .sbl-menu-foot { margin-top: clamp(24px, 6vh, 56px); display: flex; flex-wrap: wrap; gap: 8px 28px; font-family: var(--mono); font-size: .75rem; color: rgba(255,255,255,.45); }
