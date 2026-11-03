@@ -209,7 +209,10 @@ a { color: inherit; }
 .om-title span { display: block; }
 .om-title-soft { font-size: clamp(1.9rem, 5.6vw, 3.6rem); font-weight: 600; color: rgba(255,255,255,.5); letter-spacing: -.03em; }
 .om-title-main { font-size: clamp(2.1rem, 9.2vw, 5.6rem); margin-top: .12em; }
-.om-intro { margin-top: clamp(36px, 6vh, 64px); }
+.om-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: clamp(32px, 6vw, 80px); align-items: start; margin-top: clamp(36px, 6vh, 64px); }
+.om-portrait { position: relative; }
+.om-portrait::before { content: ""; position: absolute; inset: -8% -10% -6% -10%; background: radial-gradient(closest-side, rgba(110, 100, 230, .32), transparent); filter: blur(30px); z-index: 0; pointer-events: none; }
+.om-portrait img { position: relative; z-index: 1; display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 26px; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 30px 70px rgba(0,0,0,.5); }
 .om-intro p { max-width: 60ch; color: var(--om-text); font-size: clamp(1.02rem, .95rem + .3vw, 1.2rem); line-height: 1.85; font-weight: 300; }
 .om-intro p + p { margin-top: 1.25em; }
 .om-intro .om-name { color: #fff; font-weight: 600; font-size: clamp(1.25rem, 1.1rem + .6vw, 1.6rem); letter-spacing: -.01em; margin-bottom: .9em; }
@@ -257,6 +260,8 @@ a { color: inherit; }
 .om-cta-row { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 
 @media (max-width: 860px) {
+  .om-hero-grid { grid-template-columns: 1fr; }
+  .om-portrait { order: -1; max-width: 360px; }
   .om-panel { grid-template-columns: 1fr; }
   .om-shot { max-width: 420px; }
 }
