@@ -10,9 +10,9 @@ const LINKS = [
 ];
 
 // Bakgrunn med glød og prikkrutenett, felles for alle sider
-export function Backdrop() {
+export function Backdrop({ calm = false }) {
   return (
-    <div className="sbl-backdrop" aria-hidden="true">
+    <div className={`sbl-backdrop${calm ? " is-calm" : ""}`} aria-hidden="true">
       <div className="sbl-glow sbl-glow-a" />
       <div className="sbl-glow sbl-glow-b" />
       <div className="sbl-glow sbl-glow-c" />
@@ -22,7 +22,7 @@ export function Backdrop() {
 }
 
 // Topplinje med logo og hamburger + fullskjermsmeny
-export default function SiteNav() {
+export default function SiteNav({ calm = false }) {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
 
@@ -44,7 +44,7 @@ export default function SiteNav() {
 
   return (
     <>
-      <Backdrop />
+      <Backdrop calm={calm} />
       <header className="sbl-bar">
         <Link to="/" className="sbl-logo" aria-label="SBL – til forsiden">
           <span className="gradient-text">SBL</span>
