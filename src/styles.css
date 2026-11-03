@@ -182,3 +182,5 @@ a { color: inherit; }
 .lightbox::backdrop { background: rgba(8,6,16,.92); backdrop-filter: blur(6px); }
 .lightbox img { max-width: min(96vw, 1000px); max-height: 96dvh; object-fit: contain; border-radius: 12px; }
 .lightbox-close { position: fixed; top: 16px; right: 16px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: rgba(255,255,255,.1); color: #fff; font-size: 1.6rem; line-height: 1; cursor: pointer; }
+
+.proj-note { font-size: .82rem !important; line-height: 1.55; color: rgba(255,255,255,.72) !important; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(253,186,116,.25); background: rgba(253,186,116,.07); }
