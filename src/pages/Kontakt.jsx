@@ -118,7 +118,7 @@ export default function Kontakt() {
             )}
             {status === 'error' && (
               <p role="alert" style={{ fontSize: "0.8rem", color: "#F87171" }}>
-                Noe gikk galt. Prøv igjen, eller send e-post til hei@solutionsbylangaas.com.
+                Noe gikk galt. Prøv igjen, eller send e-post til martin@solutionsbylangaas.com.
               </p>
             )}
           </form>
@@ -127,8 +127,8 @@ export default function Kontakt() {
           <div style={{ display: "flex", flexDirection: "column", gap: "32px", paddingTop: "8px" }}>
             <div style={{ padding: "28px", borderRadius: "14px", border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.015)" }}>
               <div style={{ fontSize: "0.6rem", color: "#A9B4FF", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "6px" }}>E-post</div>
-              <a href="mailto:hei@solutionsbylangaas.com" style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem", textDecoration: "none" }}>
-                hei@solutionsbylangaas.com
+              <a href="mailto:martin@solutionsbylangaas.com" style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem", textDecoration: "none" }}>
+                martin@solutionsbylangaas.com
               </a>
             </div>
 

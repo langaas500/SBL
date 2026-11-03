@@ -98,7 +98,7 @@ export default function AIChatWidget() {
         ...newMessages,
         {
           role: "assistant",
-          text: "Oops, noe gikk galt! Prøv igjen, eller send en e-post til hei@solutionsbylangaas.com 😊",
+          text: "Oops, noe gikk galt! Prøv igjen, eller send en e-post til martin@solutionsbylangaas.com 😊",
         },
       ]);
     } finally {
