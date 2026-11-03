@@ -5,8 +5,17 @@ import SiteFooter from '../components/SiteFooter'
 const offers = [
   { n: '01', title: 'Nettside', desc: 'En nettside som presenterer bedriften din og fungerer for de som skal bruke den.' },
   { n: '02', title: 'App', desc: 'Trenger du noe kundene eller de ansatte kan bruke i hverdagen, kan løsningen bli en app.' },
-  { n: '03', title: 'Digitalt system', desc: 'Sliter dere med tungvinte arbeidsprosesser, som Excel-skjemaer og manuelle rapporter? Rapportering, administrasjon og godkjenning kan gjøres enkelt og digitalt.' },
-  { n: '04', title: 'Usikker på hva du trenger?', desc: 'Du trenger ikke vite hvordan det kan løses. Fortell meg om ideen eller problemet, så finner vi ut av det sammen.' },
+  { n: '03', title: 'Kundedatabase', desc: 'Kundekort og historikk samlet på ett sted, i stedet for mapper og filer spredt rundt på PC-en.' },
+  { n: '04', title: 'Digitalt system', desc: 'Sliter dere med tungvinte arbeidsprosesser, som Excel-skjemaer og manuelle rapporter? Rapportering, administrasjon og godkjenning kan gjøres enkelt og digitalt.' },
+]
+
+// Hva en kundedatabase kan gjøre. Beskriver hva jeg kan bygge, ikke tall eller resultater.
+const crm = [
+  'Et kundekort per kunde med navn, kontaktperson, telefon, e-post og adresse',
+  'Historikk per kunde, slik at du ser hva som er gjort og når',
+  'Alt i én søkbar oversikt i stedet for mapper med filer på PC-en',
+  'Tilgang for de som trenger det, med innlogging og roller',
+  'Kan hentes inn fra det dere har i dag, for eksempel Excel-lister',
 ]
 
 const steps = [
@@ -35,6 +44,29 @@ export default function Tjenester() {
             </div>
           ))}
         </div>
+
+        <section className="crm">
+          <div className="crm-text">
+            <div className="section-label crm-label">Kundedatabase</div>
+            <h2 className="crm-title">Slutt med mapper på PC-en.</h2>
+            <p>
+              Mange bedrifter har kundeinformasjon spredt i mapper, Excel-ark og e-post. Jeg kan bygge en ordentlig
+              database med kundekort og historikk, så alle finner det de trenger på ett sted.
+            </p>
+            <p>
+              Et eksempel er Servicerapport-appen, der hver rapport er koblet til et kundekort og kan finnes igjen
+              senere. <Link to="/prosjekter/servicerapport">Se prosjektet</Link>
+            </p>
+          </div>
+          <ul className="crm-list">
+            {crm.map((c) => <li key={c}>{c}</li>)}
+          </ul>
+        </section>
+
+        <p className="unsure">
+          <b>Usikker på hva du trenger?</b> Du trenger ikke vite hvordan det kan løses. Fortell meg om ideen eller
+          problemet, så finner vi ut av det sammen.
+        </p>
 
         <div className="section-label">Slik jobber jeg</div>
         <ol className="steps">
