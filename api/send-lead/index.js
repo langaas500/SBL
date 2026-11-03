@@ -7,6 +7,11 @@ import { getIp, rateLimit, isSameOrigin, escapeHtml as esc, str } from "../_lib/
 
 const MAX_LOG_MESSAGES = 30;
 
+// Avsender og mottaker kan byttes med miljøvariabler i Vercel uten ny kode.
+// Avsenderdomenet må være bekreftet i Resend.
+const FROM = process.env.LEAD_FROM_EMAIL || "Solutions by Langaas <skjema@solutionsbylangaas.com>";
+const TO = process.env.LEAD_TO_EMAIL || "lead@solutionsbylangaas.com";
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -110,7 +115,7 @@ export default async function handler(req, res) {
         ` : ""}
         <div style="padding: 20px 32px; background: rgba(255,255,255,0.03); text-align: center;">
           ${telHref ? `<a href="tel:${esc(telHref)}" style="display: inline-block; padding: 10px 24px; background: linear-gradient(135deg, #E879F9, #A855F7); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">Ring ${esc(navn || "kunden")} nå →</a>` : ""}
-          <p style="margin: 12px 0 0; font-size: 11px; color: #A39485;">Samlet inn via ${kilde === "kontaktskjema" ? "kontaktskjemaet" : "chat-assistenten"} på solutionsbylangaas.no</p>
+          <p style="margin: 12px 0 0; font-size: 11px; color: #A39485;">Samlet inn via ${kilde === "kontaktskjema" ? "kontaktskjemaet" : "chat-assistenten"} på solutionsbylangaas.com</p>
         </div>
       </div>
     `;
@@ -120,8 +125,8 @@ export default async function handler(req, res) {
     const subjectCo = (bedrift || bransje || "Bedrift ikke oppgitt").replace(/[\r\n]+/g, " ");
 
     const { data, error } = await resend.emails.send({
-      from: "Solutions by Langaas <ai@solutionsbylangaas.no>",
-      to: ["lead@solutionsbylangaas.com"],
+      from: FROM,
+      to: [TO],
       // Svar går rett til kunden når e-post er oppgitt og ser gyldig ut
       ...(/^[^\s@<>,;]+@[^\s@<>,;]+\.[^\s@<>,;]+$/.test(epost) ? { replyTo: epost } : {}),
       subject: `🔔 Ny lead: ${subjectName} – ${subjectCo}`,
