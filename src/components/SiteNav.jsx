@@ -68,7 +68,7 @@ export default function SiteNav() {
           </ul>
         </nav>
         <div className="side-foot">
-          <a href="mailto:hei@solutionsbylangaas.com">hei@solutionsbylangaas.com</a>
+          <a href="mailto:martin@solutionsbylangaas.com">martin@solutionsbylangaas.com</a>
           <span>Solutions by Langaas</span>
         </div>
       </aside>
@@ -110,7 +110,7 @@ export default function SiteNav() {
           ))}
         </ul>
         <div className="sbl-menu-foot">
-          <a href="mailto:hei@solutionsbylangaas.com" tabIndex={open ? 0 : -1}>hei@solutionsbylangaas.com</a>
+          <a href="mailto:martin@solutionsbylangaas.com" tabIndex={open ? 0 : -1}>martin@solutionsbylangaas.com</a>
           <span>Solutions by Langaas</span>
         </div>
       </nav>
