@@ -1,59 +1,122 @@
 import { Link } from 'react-router-dom'
 import SiteNav from '../components/SiteNav'
 import SiteFooter from '../components/SiteFooter'
+import Reveal from '../components/Reveal'
 
-const story = [
-  { title: 'Lei av Excel-skjemaene', desc: 'På arbeidsplassen min var arbeidsprosessene tungvinte, med Excel-skjemaer som tok unødvendig mye tid.' },
-  { title: 'Bygde min egen løsning', desc: 'I stedet for å fortsette med et tungvint system, bygde jeg en digital løsning selv.' },
-  { title: 'Lederen tok den i bruk', desc: 'Den fungerte så godt til formålet at lederen min også begynte å bruke den.' },
-  { title: 'Videreutviklet den', desc: 'Jeg bygde den videre med administrasjon og godkjenning av rapporter.' },
-]
-
-const strengths = [
-  { n: '01', title: 'Teknisk forståelse', desc: 'Mange års erfaring fra teknisk arbeid og service, så jeg vet hvordan ting faktisk fungerer ute i bedrifter.' },
-  { n: '02', title: 'Kreativitet', desc: 'Jeg bruker moderne teknologi og kunstig intelligens aktivt for å utvikle raskere, fra idé til fungerende prototype på kort tid.' },
-  { n: '03', title: 'Praktiske løsninger', desc: 'Ser jeg en tungvint arbeidsprosess, begynner jeg å tenke på hvordan den kan gjøres enklere.' },
+// Utviklingen fra et praktisk problem til en fungerende løsning, slik den er fortalt i historien.
+const flow = [
+  'Tungvinte Excel-skjemaer',
+  'Min egen digitale løsning',
+  'Tatt i bruk av lederen min',
+  'Videreutviklet med flere funksjoner',
 ]
 
 export default function Om() {
   return (
-    <div className="page">
-      <SiteNav />
-      <main className="page-main">
-        <div className="eyebrow">Om Martin</div>
-        <h1 className="page-title">Jeg vet hvordan ting <span className="grad">fungerer i praksis.</span></h1>
-        <p className="page-lead">
-          Jeg er Martin Langaas. Jeg har mange års erfaring fra teknisk arbeid og service, og kommer ikke fra en rent teoretisk bakgrunn. Jeg er en praktisk problemløser.
-        </p>
+    <div className="page om">
+      <SiteNav calm />
 
-        <div className="section-label">Historien som sier mest</div>
-        <ol className="steps">
-          {story.map((s) => (
-            <li key={s.title}><h3>{s.title}</h3><p>{s.desc}</p></li>
-          ))}
-        </ol>
+      <main>
+        {/* ── Hero ── */}
+        <section className="om-hero">
+          <Reveal className="om-wrap">
+            <div className="om-label">Mennesket bak SBL</div>
+            <h1 className="om-title">
+              <span className="om-title-soft">Håndverker av yrke.</span>
+              <span className="om-title-main">
+                <span className="om-grad">Teknologientusiast</span> av lidenskap.
+              </span>
+            </h1>
+          </Reveal>
 
-        <div className="section-label">Det jeg bringer med meg</div>
-        <div className="cards">
-          {strengths.map((s) => (
-            <div className="card" key={s.n}>
-              <div className="card-num">{s.n}</div>
-              <h3>{s.title}</h3>
-              <p>{s.desc}</p>
+          <Reveal className="om-wrap om-intro" delay={120}>
+            <p className="om-name">Jeg heter Martin Langaas.</p>
+            <p>
+              I over ti år har jeg jobbet i tekniske fag, blant annet syv år som bas. Men ved siden av jobben har jeg hatt
+              en annen stor lidenskap: IT og teknologi.
+            </p>
+            <p>
+              I 17 år har jeg brukt fritiden min på det som interesserer meg aller mest. Jeg elsker å forstå hvordan
+              teknologi fungerer, utforske mulighetene og finne nye måter å løse problemer på.
+            </p>
+          </Reveal>
+
+          <Reveal className="om-wrap" delay={200}>
+            <dl className="om-facts">
+              <div><dt>17 år</dt><dd>med IT og teknologi på fritiden</dd></div>
+              <div><dt>10+ år</dt><dd>i tekniske fag</dd></div>
+              <div><dt>7 år</dt><dd>som bas</dd></div>
+            </dl>
+          </Reveal>
+        </section>
+
+        {/* ── Historien ── */}
+        <section className="om-section">
+          <Reveal className="om-panel">
+            <div className="om-panel-text">
+              <div className="om-label">Historien</div>
+              <h2 className="om-h2">Når to verdener møtes.</h2>
+              <p>Etter hvert begynte de to verdenene å møtes.</p>
+              <p>
+                Jeg så hvor mye tid som gikk med til tungvinte Excel-skjemaer og manuelle arbeidsprosesser. Så jeg bygde
+                min egen digitale løsning. Den fungerte så godt at lederen min begynte å bruke den, og jeg videreutviklet
+                den med flere funksjoner.
+              </p>
+              <p className="om-pull">Det ga meg lyst til å ta interessen et steg videre.</p>
             </div>
-          ))}
-        </div>
 
-        <div className="section-label">Direkte kontakt</div>
-        <p className="page-lead" style={{ marginTop: 0 }}>
-          Solutions by Langaas er et lite firma. Du forholder deg direkte til personen som utvikler løsningen.
-        </p>
+            <div className="om-panel-visual">
+              <figure className="om-shot">
+                <img
+                  src="/projects/servicerapport.webp"
+                  alt="Innloggingen i Servicerapport-appen jeg bygde, på mobil"
+                  width="600" height="600" loading="lazy"
+                />
+                <figcaption>
+                  Servicerapport-appen. <Link to="/prosjekter">Se prosjektet</Link>
+                </figcaption>
+              </figure>
+              <ol className="om-flow" aria-label="Fra problem til løsning">
+                {flow.map((step) => <li key={step}>{step}</li>)}
+              </ol>
+            </div>
+          </Reveal>
+        </section>
 
-        <div className="cta-row">
-          <Link to="/kontakt" className="btn primary">Fortell meg om ideen din →</Link>
-          <Link to="/tjenester" className="btn">Se hva jeg bygger</Link>
-        </div>
+        {/* ── Starten på reisen ── */}
+        <section className="om-journey">
+          <Reveal className="om-wrap om-journey-in">
+            <div className="om-label om-label-center">Solutions by Langaas</div>
+            <h2 className="om-h2 om-h2-xl">Solutions by Langaas er starten på den reisen.</h2>
+            <p className="om-journey-text">
+              Jeg bygger nå gradvis opp mitt eget firma, hvor jeg kombinerer praktisk erfaring fra arbeidslivet med min
+              mangeårige interesse for teknologi.
+            </p>
+          </Reveal>
+          <Reveal className="om-wrap om-goal-wrap" delay={160}>
+            <p className="om-goal-lead">Målet er enkelt:</p>
+            <p className="om-goal">
+              Å skape nettsider, apper og digitale systemer som løser <span className="om-grad">virkelige problemer.</span>
+            </p>
+          </Reveal>
+        </section>
+
+        {/* ── Avslutning ── */}
+        <section className="om-section om-end">
+          <Reveal className="om-cta">
+            <h2 className="om-h2">Har du noe du vil gjøre enklere?</h2>
+            <p>
+              Enten du trenger en moderne nettside eller har en idé til et digitalt verktøy, tar jeg gjerne en
+              uforpliktende prat.
+            </p>
+            <div className="om-cta-row">
+              <Link to="/kontakt" className="btn primary">La oss ta en prat</Link>
+              <Link to="/tjenester" className="btn">Se hva jeg tilbyr</Link>
+            </div>
+          </Reveal>
+        </section>
       </main>
+
       <SiteFooter />
     </div>
   )
