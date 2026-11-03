@@ -26,7 +26,7 @@ export default function Tjenester() {
           Jeg bygger det som faktisk løser et problem hos deg, basert på hvordan ting fungerer ute i bedrifter.
         </p>
 
-        <div className="cards">
+        <div className="cards cards-2">
           {offers.map((o) => (
             <div className="card" key={o.n}>
               <div className="card-num">{o.n}</div>
