@@ -204,7 +204,7 @@ a { color: inherit; }
 .om-grad { background: linear-gradient(95deg, #c4b5fd 0%, #a5b4fc 50%, #93c5fd 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 
 /* Hero */
-.om-hero { padding: clamp(120px, 18vh, 190px) 0 clamp(48px, 9vh, 96px); }
+.om-hero { padding: clamp(120px, 18vh, 190px) 0 clamp(48px, 9vh, 96px); overflow-x: clip; }
 .om-title { margin-top: 26px; font-weight: 800; letter-spacing: -.04em; line-height: 1.02; }
 .om-title span { display: block; }
 .om-title-soft { font-size: clamp(1.9rem, 5.6vw, 3.6rem); font-weight: 600; color: rgba(255,255,255,.5); letter-spacing: -.03em; }
