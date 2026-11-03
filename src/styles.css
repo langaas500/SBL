@@ -138,7 +138,12 @@ a { color: inherit; }
 .proj p { color: var(--muted); font-size: .92rem; line-height: 1.65; }
 .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
 .proj-tags span { font-family: var(--mono); font-size: .62rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: rgba(255,255,255,.6); }
-.proj-link { font-size: .85rem; font-weight: 600; color: #b4bcff; }
+.proj-links { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.proj h3 a { color: inherit; text-decoration: none; }
+.proj h3 a:hover { color: #b4bcff; }
+.proj-link { font-size: .85rem; font-weight: 600; color: #b4bcff; text-decoration: none; }
+.proj-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.proj-link-soft { color: rgba(255,255,255,.62); font-weight: 500; }
 .proj-more { justify-content: center; align-items: flex-start; padding: 28px 26px; gap: 12px; border-style: dashed; background: rgba(124,92,255,.06); }
 .proj-more h3 { font-size: 1.25rem; }
 
@@ -304,4 +309,43 @@ a { color: inherit; }
 @media (max-width: 520px) {
   .om-facts > div { padding-right: 10px; }
   .om-actions .btn, .om-cta-row .btn { width: 100%; justify-content: center; }
+}
+
+/* ── Prosjekt-detaljside ── */
+.pd-main { padding-top: 104px; }
+.pd-back { display: inline-flex; align-items: center; min-height: 36px; font-size: .88rem; color: rgba(255,255,255,.55); text-decoration: none; transition: color .25s; }
+.pd-back:hover { color: #fff; }
+.pd-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: clamp(32px, 5vw, 72px); align-items: start; margin-top: 28px; }
+.pd-title { margin-top: 18px; font-weight: 700; letter-spacing: -.035em; line-height: 1.04; font-size: clamp(2.1rem, 4.4vw, 3.5rem); }
+.pd-lead { margin-top: 22px; max-width: 52ch; color: rgba(255,255,255,.72); font-size: 1.1rem; line-height: 1.75; font-weight: 300; }
+.pd-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
+.pd-note { margin-top: 26px; max-width: 52ch; }
+.pd-visual { position: relative; aspect-ratio: 1 / 1; border-radius: 22px; overflow: hidden; border: 1px solid var(--line); background: radial-gradient(ellipse at 30% 20%, rgba(124,92,255,.22), rgba(20,16,36,.9) 70%); }
+.pd-cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); margin-top: clamp(56px, 9vh, 96px); padding-top: clamp(40px, 6vh, 64px); border-top: 1px solid var(--line); }
+.pd-h2 { font-family: var(--mono); font-size: .72rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: #a9b4ff; margin-bottom: 20px; }
+.pd-about p { max-width: 56ch; color: rgba(255,255,255,.74); font-size: 1.04rem; line-height: 1.85; font-weight: 300; }
+.pd-about p + p { margin-top: 1.1em; }
+.pd-list { list-style: none; display: grid; gap: 0; }
+.pd-list li { position: relative; padding: 11px 0 11px 24px; border-bottom: 1px solid rgba(255,255,255,.06); color: rgba(255,255,255,.78); font-size: .96rem; line-height: 1.55; }
+.pd-list li:first-child { padding-top: 0; }
+.pd-list li::before { content: ""; position: absolute; left: 0; top: 1.05em; width: 7px; height: 7px; border-radius: 50%; background: #8f9cff; }
+.pd-list li:first-child::before { top: .5em; }
+.pd-tech { margin-top: clamp(40px, 6vh, 64px); }
+.pd-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: clamp(56px, 9vh, 96px); }
+.pd-pager-link { display: flex; flex-direction: column; gap: 6px; padding: 20px 22px; border-radius: 16px; border: 1px solid var(--line); background: rgba(255,255,255,.028); color: #fff; text-decoration: none; transition: border-color .25s, background .25s; }
+.pd-pager-link:hover { border-color: rgba(143,156,255,.4); background: rgba(143,156,255,.05); }
+.pd-pager-link span { font-family: var(--mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.5); }
+.pd-pager-link b { font-weight: 600; font-size: 1.1rem; letter-spacing: -.01em; }
+.pd-pager-next { text-align: right; }
+
+@media (max-width: 1040px) {
+  .pd-top { grid-template-columns: 1fr; }
+  .pd-visual { max-width: 520px; }
+  .pd-cols { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .pd-main { padding-top: 88px; }
+  .pd-actions .btn { width: 100%; justify-content: center; }
+  .pd-pager { grid-template-columns: 1fr; }
+  .pd-pager-next { text-align: left; }
 }

@@ -25,6 +25,7 @@ export function Backdrop() {
 export default function SiteNav() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
+  const isActive = (to) => pathname === to || (to !== "/" && pathname.startsWith(to + "/"));
 
   // Lukk mobilmenyen når siden byttes
   useEffect(() => { setOpen(false); }, [pathname]);
@@ -57,8 +58,8 @@ export default function SiteNav() {
               <li key={l.to}>
                 <Link
                   to={l.to}
-                  className={pathname === l.to ? "is-active" : ""}
-                  aria-current={pathname === l.to ? "page" : undefined}
+                  className={isActive(l.to) ? "is-active" : ""}
+                  aria-current={isActive(l.to) ? "page" : undefined}
                 >
                   {l.label}
                 </Link>
@@ -99,8 +100,8 @@ export default function SiteNav() {
               <Link
                 to={l.to}
                 tabIndex={open ? 0 : -1}
-                className={pathname === l.to ? "is-active" : ""}
-                aria-current={pathname === l.to ? "page" : undefined}
+                className={isActive(l.to) ? "is-active" : ""}
+                aria-current={isActive(l.to) ? "page" : undefined}
               >
                 <span className="sbl-menu-num">0{i + 1}</span>
                 <span className="sbl-menu-label">{l.label}</span>
